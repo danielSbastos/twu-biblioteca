@@ -1,13 +1,16 @@
 package com.twu.biblioteca;
 
-public class Library {
-    private String[] books;
+import  com.twu.biblioteca.models.Book;
+import java.util.List;
 
-    Library(String[] books) {
+public class Library {
+    private List<Book> books;
+
+    Library(List<Book> books) {
         this.books = books;
     }
 
-    public String[] getAllBooks() {
+    public List<Book> getAllBooks() {
         return this.books;
     }
 }
