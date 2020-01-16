@@ -9,11 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="junit-4.11" level="project" />
-<<<<<<< HEAD
-  </component>
-</module>
-
-=======
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit4">
         <CLASSES>
@@ -26,4 +21,3 @@
     </orderEntry>
   </component>
 </module>
->>>>>>> Add task 1.1 - view welcome message
