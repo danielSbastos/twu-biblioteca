@@ -15,7 +15,7 @@ public class Main {
 
     private static void showBooksOnTheScreen() {
         List<Book> books = new ArrayList<>();
-        books.add(new Book("Book1", "Book1 author", 1945));
+        books.add(new Book("Bodfgjfdgijdfgijdfgjidfgiojoij fsok1", "Book1 author", 1945));
         books.add(new Book("Book2", "Book2 author", 1945));
         Library library = new Library(books);
         for (Book book : library.getAllBooks()) {
