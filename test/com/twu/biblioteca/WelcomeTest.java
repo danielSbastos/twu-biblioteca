@@ -8,7 +8,8 @@ public class WelcomeTest {
     public void showMessageReturnsWelcomeMessage() {
         Welcome welcome = new Welcome();
 
-        String expectedMessage = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
+        String expectedMessage = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n" +
+                                 "Choose one option to continue:";
 
         assertEquals(welcome.showMessage(), expectedMessage);
     }
