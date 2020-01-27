@@ -1,13 +1,25 @@
 package com.twu.biblioteca;
 
-public class Menu {
-    private String[] options;
+import com.twu.biblioteca.interfaces.IOption;
+import java.util.List;
+import java.util.stream.Collectors;
 
-    public Menu(String[] options) {
+public class Menu {
+    private List<IOption> options;
+
+    public Menu(List<IOption> options) {
         this.options = options;
     }
 
-    public String[] getOptions() {
+    public List<IOption> getOptions() {
         return this.options;
+    }
+
+    public IOption getOptionById(int id) throws IndexOutOfBoundsException {
+        return this.options
+                   .stream()
+                   .filter(option -> option.getId() == id)
+                   .collect(Collectors.toList())
+                   .get(0);
     }
 }
