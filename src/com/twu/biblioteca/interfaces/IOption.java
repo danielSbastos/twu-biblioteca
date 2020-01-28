@@ -5,5 +5,5 @@ public interface IOption {
 
     String getTitle();
 
-    String getInformation();
+    String action();
 };

@@ -13,7 +13,7 @@ public class BookList implements IOption {
         this.items = items;
     }
 
-    public String getInformation() {
+    public String action() {
         String information = "";
         for (Book book : this.items) {
             information += String.format("Title: %s | Author: %s | Publication Year: %s\n",

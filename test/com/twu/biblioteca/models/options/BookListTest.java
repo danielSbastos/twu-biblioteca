@@ -26,7 +26,7 @@ public class BookListTest {
         books.add(new Book(book2Title, book2Author, book2PublicationYear));
 
         BookList bookList = new BookList(books);
-        String booksInformation = bookList.getInformation();
+        String booksInformation = bookList.action();
 
         String expectedBooksInformation = "";
         expectedBooksInformation +=  String.format("Title: %s | Author: %s | Publication Year: %s\n",
@@ -47,7 +47,7 @@ public class BookListTest {
         List<Book> books = new ArrayList<>();
         BookList bookList = new BookList(books);
 
-        String bookInformation = bookList.getInformation();
+        String bookInformation = bookList.action();
 
         String expectedInformation = "";
         assertEquals(bookInformation, expectedInformation);

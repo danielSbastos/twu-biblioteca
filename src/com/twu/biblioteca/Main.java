@@ -1,8 +1,10 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.interfaces.IOption;
+import com.twu.biblioteca.lib.SystemWrapper;
 import com.twu.biblioteca.models.Book;
 import com.twu.biblioteca.models.options.BookList;
+import com.twu.biblioteca.models.options.Quit;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,7 +39,7 @@ public class Main {
 
     private static void executeChosenOption(Menu menu, int optionId) throws IndexOutOfBoundsException {
         IOption option = menu.getOptionById(optionId);
-        System.out.println(option.getInformation());
+        System.out.println(option.action());
 
     }
 
@@ -55,9 +57,12 @@ public class Main {
         books.add(new Book("Book1", "Book1 author", 1945));
         books.add(new Book("Book2", "Book2 author", 1945));
 
+        Quit quitOption = new Quit(new SystemWrapper());
+
         List<IOption> options = new ArrayList<>();
         IOption bookListOption = new BookList(books);
         options.add(bookListOption);
+        options.add(quitOption);
 
         Menu menu = new Menu(options);
         return menu;
