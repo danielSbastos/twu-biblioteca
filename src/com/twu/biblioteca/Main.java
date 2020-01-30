@@ -19,28 +19,28 @@ public class Main {
         System.out.println(welcome.showMessage());
 
         Menu menu = buildMenu();
-        showMenu(menu);
 
         try {
-            int chosenOptionId = readUserInput();
-            executeChosenOption(menu, chosenOptionId);
+           executeMainMenu(menu);
         } catch (IOException | NumberFormatException e) {
             System.err.println("Invalid input format!");
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.err.println("Please select a valid option");
         }
+    }
 
+    private static void executeMainMenu(Menu menu) throws IOException {
+        while (true) {
+            showMenu(menu);
+            int chosenOptionId = readUserInput();
+            String optionContent = menu.executeOption(chosenOptionId);
+            System.out.println(optionContent);
+        }
     }
 
     private static int readUserInput() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         return Integer.parseInt(reader.readLine());
-    }
-
-    private static void executeChosenOption(Menu menu, int optionId) throws IndexOutOfBoundsException {
-        IOption option = menu.getOptionById(optionId);
-        System.out.println(option.action());
-
     }
 
     private static void showMenu(Menu menu) {
@@ -49,9 +49,9 @@ public class Main {
         for (IOption option : menuOptions) {
             System.out.println(option.getId() + ". " + option.getTitle());
         }
-
     }
 
+    // TODO: Move to a factory
     private static Menu buildMenu() {
         List<Book> books = new ArrayList<>();
         books.add(new Book("Book1", "Book1 author", 1945));
@@ -64,7 +64,6 @@ public class Main {
         options.add(bookListOption);
         options.add(quitOption);
 
-        Menu menu = new Menu(options);
-        return menu;
+        return new Menu(options);
     }
 }

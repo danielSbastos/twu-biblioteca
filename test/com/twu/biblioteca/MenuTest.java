@@ -3,9 +3,13 @@ package com.twu.biblioteca;
 import com.twu.biblioteca.interfaces.IOption;
 import com.twu.biblioteca.models.Book;
 import com.twu.biblioteca.models.options.BookList;
+
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
+import org.mockito.Mockito;
+
+import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -52,5 +56,21 @@ public class MenuTest {
         Menu menu = new Menu(options);
         int invalidOptionId = -1;
         menu.getOptionById(invalidOptionId);
+    }
+
+    @Test
+    public void executeChosenOptionReturnsChosen()
+    {
+        List<Book> books = new ArrayList<>();
+        IOption mockedBookListOption = Mockito.mock(BookList.class);
+        when(mockedBookListOption.getId()).thenCallRealMethod();
+
+        List<IOption> options = new ArrayList<>();
+        options.add(mockedBookListOption);
+
+        Menu menu = new Menu(options);
+        menu.executeOption(1);
+
+        verify(mockedBookListOption, times(1)).action();
     }
 }

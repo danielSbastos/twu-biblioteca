@@ -15,11 +15,20 @@ public class Menu {
         return this.options;
     }
 
+    //TODO: make it private
     public IOption getOptionById(int id) throws IndexOutOfBoundsException {
         return this.options
                    .stream()
                    .filter(option -> option.getId() == id)
                    .collect(Collectors.toList())
                    .get(0);
+    }
+
+    public String executeOption(int optionId) {
+        IOption currentOption = this.getOptionById(optionId);
+        return currentOption.action();
+    }
+
+    public void closeCurrentOption() {
     }
 }
