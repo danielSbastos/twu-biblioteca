@@ -16,7 +16,8 @@ public class BookList implements IOption {
     public String action() {
         String information = "";
         for (Book book : this.items) {
-            information += String.format("Title: %s | Author: %s | Publication Year: %s\n",
+            information += String.format("Id: %s | Title: %s | Author: %s | Publication Year: %s\n",
+                book.getId(),
                 book.getTitle(),
                 book.getAuthor(),
                 book.getPublicationYear());

@@ -13,10 +13,10 @@ public class Library {
         this.books = books;
     }
 
-    public void checkoutBook(String bookName) {
+    public void checkoutBook(int bookId) {
         Book matchedBook = this.books
                                .stream()
-                               .filter(book -> book.getTitle() == bookName)
+                               .filter(book -> book.getId() == bookId)
                                .collect(Collectors.toList())
                                .get(0);
 

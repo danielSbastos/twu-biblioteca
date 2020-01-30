@@ -15,13 +15,13 @@ public class LibraryTest {
     @Test
     public void checkoutBookCheckoutsTheBook() {
         List<Book> books = new ArrayList<>();
-        Book book = new Book("Book1", "Author1", 1999);
+        Book book = new Book(1, "Book1", "Author1", 1999);
         books.add(book);
 
         Library library = new Library(books);
 
-        String bookName = "Book1";
-        library.checkoutBook(bookName);
+        int bookId = 1;
+        library.checkoutBook(bookId);
 
         assertThat(book.getStatus(), is("booked"));
     }

@@ -14,26 +14,30 @@ public class BookListTest {
     {
         List<Book> books = new ArrayList<>();
 
+        int book1Id = 1;
         String book1Title = "Book1";
         String book1Author = "Author1";
         int book1PublicationYear = 1945;
 
+        int book2Id = 2;
         String book2Title = "Book2";
         String book2Author = "Author2";
         int book2PublicationYear = 1945;
 
-        books.add(new Book(book1Title, book1Author, book1PublicationYear));
-        books.add(new Book(book2Title, book2Author, book2PublicationYear));
+        books.add(new Book(book1Id, book1Title, book1Author, book1PublicationYear));
+        books.add(new Book(book2Id, book2Title, book2Author, book2PublicationYear));
 
         BookList bookList = new BookList(books);
         String booksInformation = bookList.action();
 
         String expectedBooksInformation = "";
-        expectedBooksInformation +=  String.format("Title: %s | Author: %s | Publication Year: %s\n",
+        expectedBooksInformation +=  String.format("Id: %s | Title: %s | Author: %s | Publication Year: %s\n",
+                                                    book1Id,
                                                     book1Title,
                                                     book1Author,
                                                     book1PublicationYear);
-        expectedBooksInformation +=  String.format("Title: %s | Author: %s | Publication Year: %s\n",
+        expectedBooksInformation +=  String.format("Id: %s | Title: %s | Author: %s | Publication Year: %s\n",
+                                                    book2Id,
                                                     book2Title,
                                                     book2Author,
                                                     book2PublicationYear);

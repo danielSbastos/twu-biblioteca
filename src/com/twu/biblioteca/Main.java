@@ -54,8 +54,8 @@ public class Main {
     // TODO: Move to a factory
     private static Menu buildMenu() {
         List<Book> books = new ArrayList<>();
-        books.add(new Book("Book1", "Book1 author", 1945));
-        books.add(new Book("Book2", "Book2 author", 1945));
+        books.add(new Book(1, "Book1", "Book1 author", 1945));
+        books.add(new Book(2, "Book2", "Book2 author", 1945));
 
         Quit quitOption = new Quit(new SystemWrapper());
 
