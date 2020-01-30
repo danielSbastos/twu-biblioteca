@@ -29,4 +29,20 @@ public class BookTest {
 
         assertEquals(book.getPublicationYear(), publicationYear);
     }
+
+    @Test
+    public void getStatusReturnsStatus() {
+        Book book = new Book("Book title", "Author 1", 1999);
+
+        assertEquals(book.getStatus(), "available");
+    }
+
+    @Test
+    public void setStatusSetsNewStatus() {
+        Book book = new Book("Book title", "Author 1", 1999);
+
+        book.setStatus("booked");
+
+        assertEquals(book.getStatus(), "booked");
+    }
 }
