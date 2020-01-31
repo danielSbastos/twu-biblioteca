@@ -39,4 +39,34 @@ public class LibraryTest {
 
         assertThat(result, is("Book already booked."));
     }
+
+    @Test
+    public void returnsBookSuccessfullyReturnsBook() {
+        List<Book> books = new ArrayList<>();
+        Book book = new Book(1, "Book1", "Author1", 1999);
+        book.setStatus("booked");
+        books.add(book);
+
+        Library library = new Library(books);
+
+        String result = library.returnBook(book.getId());
+
+        assertThat(book.getStatus(), is("available"));
+        assertThat(result, is("Successfully returned book."));
+    }
+
+
+    @Test
+    public void returnsBookFailsToReturnsBook() {
+        List<Book> books = new ArrayList<>();
+        Book book = new Book(1, "Book1", "Author1", 1999);
+        book.setStatus("available");
+        books.add(book);
+
+        Library library = new Library(books);
+
+        String result = library.returnBook(book.getId());
+
+        assertThat(result, is("Book was already returned."));
+    }
 }

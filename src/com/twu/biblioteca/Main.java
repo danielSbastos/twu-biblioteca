@@ -17,7 +17,7 @@ public class Main {
 
     public static void main(String[] args) {
         Welcome welcome = new Welcome();
-        new OutputWriterWrapper().writeString(welcome.showMessage());
+        new OutputWriterWrapper().writeStringln(welcome.showMessage());
 
         Menu menu = buildMenu();
 
@@ -35,7 +35,7 @@ public class Main {
             showMenu(menu);
             int chosenOptionId = new InputReaderWrapper().readInt();
             String optionContent = menu.executeOption(chosenOptionId);
-            new OutputWriterWrapper().writeString(optionContent);
+            new OutputWriterWrapper().writeStringln(optionContent);
         }
     }
 
@@ -43,7 +43,7 @@ public class Main {
         List<IOption> menuOptions = menu.getOptions();
 
         for (IOption option : menuOptions) {
-            new OutputWriterWrapper().writeString(option.getId() + ". " + option.getTitle());
+            new OutputWriterWrapper().writeStringln(option.getId() + ". " + option.getTitle());
         }
     }
 

@@ -32,8 +32,8 @@ public class BooksOptionTest {
         BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapperMock);
         String result = booksOption.action();
 
-        verify(outputWriterWrapperMock, times(1)).writeString(expectedBooksInformation);
-        verify(outputWriterWrapperMock, times(1)).writeString(
+        verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
+        verify(outputWriterWrapperMock, times(1)).writeStringln(
                 "Do you wish to checkout any book? If yes, enter its id: "
         );
         assertEquals(result, "Successfully booked book.");
@@ -57,8 +57,8 @@ public class BooksOptionTest {
         BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapperMock);
         booksOption.action();
 
-        verify(outputWriterWrapperMock, times(1)).writeString(expectedBooksInformation);
-        verify(outputWriterWrapperMock, times(1)).writeString(
+        verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
+        verify(outputWriterWrapperMock, times(1)).writeStringln(
                 "Do you wish to checkout any book? If yes, enter its id: "
         );
 
@@ -83,8 +83,8 @@ public class BooksOptionTest {
         BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapperMock);
         String result = booksOption.action();
 
-        verify(outputWriterWrapperMock, times(1)).writeString(expectedBooksInformation);
-        verify(outputWriterWrapperMock, times(1)).writeString(
+        verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
+        verify(outputWriterWrapperMock, times(1)).writeStringln(
                 "Do you wish to checkout any book? If yes, enter its id: "
         );
         assertEquals(result, "Book already booked.");
@@ -109,6 +109,46 @@ public class BooksOptionTest {
         booksOption.action();
 
         assertEquals(firstBook.getStatus(), "available");
+        assertEquals(secondBook.getStatus(), "available");
+    }
+
+    @Test
+    public void returnBookDoesNotChangeAlreadyReturnedBookStatus() throws IOException {
+        List<Book> books = buildBooks();
+        Book firstBook = books.get(0);
+        firstBook.setStatus("booked");
+        Book secondBook = books.get(1);
+
+        Library library = new Library(books);
+        InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
+        when(inputReaderWrapperMock.readInt()).thenThrow(new IOException()).thenReturn(firstBook.getId());
+
+        OutputWriterWrapper outputWriterWrapper = Mockito.mock(OutputWriterWrapper.class);
+
+        BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapper);
+        booksOption.action();
+
+        assertEquals(firstBook.getStatus(), "available");
+        assertEquals(secondBook.getStatus(), "available");
+    }
+
+    @Test
+    public void returnBookDoesNothingWhenUserDoesNotInputId() throws IOException {
+        List<Book> books = buildBooks();
+        Book firstBook = books.get(0);
+        firstBook.setStatus("booked");
+        Book secondBook = books.get(1);
+
+        Library library = new Library(books);
+        InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
+        when(inputReaderWrapperMock.readInt()).thenThrow(new IOException()).thenThrow(new IOException());
+
+        OutputWriterWrapper outputWriterWrapper = Mockito.mock(OutputWriterWrapper.class);
+
+        BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapper);
+        booksOption.action();
+
+        assertEquals(firstBook.getStatus(), "booked");
         assertEquals(secondBook.getStatus(), "available");
     }
 
@@ -137,8 +177,6 @@ public class BooksOptionTest {
         List<Book> books = new ArrayList<>();
         books.add(new Book(1, "Book1", "Author1", 2000));
         books.add(new Book(2, "Book2", "Author2", 2000));
-
-
 
         return books;
     }

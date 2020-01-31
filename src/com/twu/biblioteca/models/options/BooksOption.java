@@ -32,9 +32,11 @@ public class BooksOption implements IOption {
             );
         }
 
-        this.outputWriterWrapper.writeString(information);
-        this.outputWriterWrapper.writeString("Do you wish to checkout any book? If yes, enter its id: ");
-        return checkoutBook(this.library, this.inputReaderWrapper, this.outputWriterWrapper);
+        this.outputWriterWrapper.writeStringln(information);
+        askCheckoutBook(this.library, this.inputReaderWrapper, this.outputWriterWrapper);
+        askReturnBook(this.library, this.inputReaderWrapper, this.outputWriterWrapper);
+
+        return "";
     }
 
     public int getId() {
@@ -46,13 +48,20 @@ public class BooksOption implements IOption {
     }
 
     // TODO: Move to its own class
-    private static String checkoutBook(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
+    private static void askReturnBook(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
+        outputWriterWrapper.writeString("Do you wish to return a book? If yes, enter its id or press enter to continue: ");
         try {
             int bookId = inputReaderWrapper.readInt();
-            outputWriterWrapper.writeString("" + bookId);
-            return library.checkoutBook(bookId);
-        } catch (IOException | NumberFormatException e) {
-            return "An error has occurred when booking.";
-        }
+            outputWriterWrapper.writeStringln(library.returnBook(bookId));
+        } catch (IOException | NumberFormatException e) {}
+    }
+
+    // TODO: Move to its own class
+    private static void askCheckoutBook(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
+        outputWriterWrapper.writeString("Do you wish to checkout any book? If yes, enter its id or press enter to continue: ");
+        try {
+            int bookId = inputReaderWrapper.readInt();
+            outputWriterWrapper.writeStringln(library.checkoutBook(bookId));
+        } catch (IOException | NumberFormatException e) {}
     }
 }

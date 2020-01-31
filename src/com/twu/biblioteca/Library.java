@@ -18,21 +18,40 @@ public class Library {
     }
 
     public String checkoutBook(int bookId) {
-        Book matchedBook = this.books
-                               .stream()
-                               .filter(book -> book.getId() == bookId)
-                               .collect(Collectors.toList())
-                               .get(0);
+        Book book = findBook(bookId);
 
-        if (alreadyBooked(matchedBook)) {
+        if (alreadyBooked(book)) {
             return "Book already booked.";
         }
 
-        matchedBook.setStatus("booked");
+        book.setStatus("booked");
         return "Successfully booked book.";
+    }
+
+    public String returnBook(int bookId) {
+        Book book = findBook(bookId);
+
+        if (alreadyReturned(book)) {
+            return "Book was already returned.";
+        }
+
+        book.setStatus("available");
+        return "Successfully returned book.";
+    }
+
+    private Book findBook(int bookId) {
+        return this.books
+               .stream()
+               .filter(book -> book.getId() == bookId)
+               .collect(Collectors.toList())
+               .get(0);
     }
 
     private boolean alreadyBooked(Book book) {
         return book.getStatus() == "booked";
+    }
+
+    private boolean alreadyReturned(Book book) {
+        return book.getStatus() == "available";
     }
 }
