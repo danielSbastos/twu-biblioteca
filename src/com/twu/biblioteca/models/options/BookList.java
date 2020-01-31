@@ -34,9 +34,7 @@ public class BookList implements IOption {
 
         this.outputWriterWrapper.writeString(information);
         this.outputWriterWrapper.writeString("Do you wish to checkout any book? If yes, enter its id: ");
-        checkoutBook(this.library, this.inputReaderWrapper, this.outputWriterWrapper);
-
-        return "";
+        return checkoutBook(this.library, this.inputReaderWrapper, this.outputWriterWrapper);
     }
 
     public int getId() {
@@ -48,11 +46,13 @@ public class BookList implements IOption {
     }
 
     // TODO: Move to its own class
-    private static void checkoutBook(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
+    private static String checkoutBook(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
         try {
             int bookId = inputReaderWrapper.readInt();
             outputWriterWrapper.writeString("" + bookId);
-            library.checkoutBook(bookId);
-        } catch (IOException | NumberFormatException e) {}
+            return library.checkoutBook(bookId);
+        } catch (IOException | NumberFormatException e) {
+            return "An error has occurred when booking.";
+        }
     }
 }

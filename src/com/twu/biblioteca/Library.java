@@ -17,13 +17,22 @@ public class Library {
         return this.books;
     }
 
-    public void checkoutBook(int bookId) {
+    public String checkoutBook(int bookId) {
         Book matchedBook = this.books
                                .stream()
                                .filter(book -> book.getId() == bookId)
                                .collect(Collectors.toList())
                                .get(0);
 
+        if (alreadyBooked(matchedBook)) {
+            return "Book already booked.";
+        }
+
         matchedBook.setStatus("booked");
+        return "Successfully booked book.";
+    }
+
+    private boolean alreadyBooked(Book book) {
+        return book.getStatus() == "booked";
     }
 }

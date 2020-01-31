@@ -32,12 +32,13 @@ public class BookListTest {
         Library library = new Library(books);
 
         BookList bookList = new BookList(library, inputReaderWrapperMock, outputWriterWrapperMock);
-        bookList.action();
+        String result = bookList.action();
 
         verify(outputWriterWrapperMock, times(1)).writeString(expectedBooksInformation);
         verify(outputWriterWrapperMock, times(1)).writeString(
                 "Do you wish to checkout any book? If yes, enter its id: "
         );
+        assertEquals(result, "Successfully booked book.");
         assertEquals(firstBook.getStatus(), "booked");
         assertEquals(secondBook.getStatus(), "available");
     }
@@ -64,7 +65,34 @@ public class BookListTest {
         verify(outputWriterWrapperMock, times(1)).writeString(
                 "Do you wish to checkout any book? If yes, enter its id: "
         );
+
         assertEquals(firstBook.getStatus(), "available");
+        assertEquals(secondBook.getStatus(), "available");
+    }
+
+    @Test
+    public void actionPrintsBooksTableAndDoesNotAlreadyBookedBook() throws IOException {
+        List<Book> books = buildBooks();
+        Book firstBook = books.get(0);
+        firstBook.setStatus("booked");
+        Book secondBook = books.get(1);
+
+        String expectedBooksInformation = expectedBooksTable(firstBook, secondBook);
+
+        InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
+        when(inputReaderWrapperMock.readInt()).thenReturn(firstBook.getId());
+        OutputWriterWrapper outputWriterWrapperMock = Mockito.mock(OutputWriterWrapper.class);
+        Library library = new Library(books);
+
+        BookList bookList = new BookList(library, inputReaderWrapperMock, outputWriterWrapperMock);
+        String result = bookList.action();
+
+        verify(outputWriterWrapperMock, times(1)).writeString(expectedBooksInformation);
+        verify(outputWriterWrapperMock, times(1)).writeString(
+                "Do you wish to checkout any book? If yes, enter its id: "
+        );
+        assertEquals(result, "Book already booked.");
+        assertEquals(firstBook.getStatus(), "booked");
         assertEquals(secondBook.getStatus(), "available");
     }
 
