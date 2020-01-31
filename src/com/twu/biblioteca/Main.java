@@ -14,9 +14,10 @@ import java.util.ArrayList;
 
 
 public class Main {
+
     public static void main(String[] args) {
         Welcome welcome = new Welcome();
-        System.out.println(welcome.showMessage());
+        new OutputWriterWrapper().writeString(welcome.showMessage());
 
         Menu menu = buildMenu();
 
@@ -34,7 +35,7 @@ public class Main {
             showMenu(menu);
             int chosenOptionId = new InputReaderWrapper().readInt();
             String optionContent = menu.executeOption(chosenOptionId);
-            System.out.println(optionContent);
+            new OutputWriterWrapper().writeString(optionContent);
         }
     }
 
@@ -42,7 +43,7 @@ public class Main {
         List<IOption> menuOptions = menu.getOptions();
 
         for (IOption option : menuOptions) {
-            System.out.println(option.getId() + ". " + option.getTitle());
+            new OutputWriterWrapper().writeString(option.getId() + ". " + option.getTitle());
         }
     }
 

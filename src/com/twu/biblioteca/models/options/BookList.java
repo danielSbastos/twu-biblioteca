@@ -36,7 +36,7 @@ public class BookList implements IOption {
         this.outputWriterWrapper.writeString("Do you wish to checkout any book? If yes, enter its id: ");
         checkoutBook(this.library, this.inputReaderWrapper, this.outputWriterWrapper);
 
-        return "Done";
+        return "";
     }
 
     public int getId() {
