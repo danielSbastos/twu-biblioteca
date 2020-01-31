@@ -23,8 +23,6 @@ public class BookListTest {
         Book secondBook = books.get(1);
 
         String expectedBooksInformation = expectedBooksTable(firstBook, secondBook);
-        assertEquals(firstBook.getStatus(), "available");
-        assertEquals(secondBook.getStatus(), "available");
 
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
         when(inputReaderWrapperMock.readInt()).thenReturn(firstBook.getId());
@@ -50,8 +48,6 @@ public class BookListTest {
         Book secondBook = books.get(1);
 
         String expectedBooksInformation = expectedBooksTable(firstBook, secondBook);
-        assertEquals(firstBook.getStatus(), "available");
-        assertEquals(secondBook.getStatus(), "available");
 
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
         when(inputReaderWrapperMock.readInt()).thenThrow(new IOException());
@@ -96,6 +92,7 @@ public class BookListTest {
         assertEquals(secondBook.getStatus(), "available");
     }
 
+    // TODO: Move to test setUp
     private String expectedBooksTable(Book firstBook, Book secondBook) {
         String expectedBooksInformation = "";
         expectedBooksInformation += String.format("Id: %s | Title: %s | Author: %s | Publication Year: %s | Status: %s\n",
