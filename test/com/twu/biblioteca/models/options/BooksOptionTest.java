@@ -25,18 +25,13 @@ public class BooksOptionTest {
         String expectedBooksInformation = expectedBooksTable(firstBook, secondBook);
 
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
-        when(inputReaderWrapperMock.readInt()).thenReturn(firstBook.getId());
+        when(inputReaderWrapperMock.readInt()).thenReturn(firstBook.getId()).thenThrow(new IOException());
         OutputWriterWrapper outputWriterWrapperMock = Mockito.mock(OutputWriterWrapper.class);
         Library library = new Library(books);
 
         BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapperMock);
         String result = booksOption.action();
 
-        verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
-        verify(outputWriterWrapperMock, times(1)).writeStringln(
-                "Do you wish to checkout any book? If yes, enter its id: "
-        );
-        assertEquals(result, "Successfully booked book.");
         assertEquals(firstBook.getStatus(), "booked");
         assertEquals(secondBook.getStatus(), "available");
     }
@@ -50,17 +45,12 @@ public class BooksOptionTest {
         String expectedBooksInformation = expectedBooksTable(firstBook, secondBook);
 
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
-        when(inputReaderWrapperMock.readInt()).thenThrow(new IOException());
+        when(inputReaderWrapperMock.readInt()).thenThrow(new IOException()).thenThrow(new IOException());
         OutputWriterWrapper outputWriterWrapperMock = Mockito.mock(OutputWriterWrapper.class);
         Library library = new Library(books);
 
         BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapperMock);
         booksOption.action();
-
-        verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
-        verify(outputWriterWrapperMock, times(1)).writeStringln(
-                "Do you wish to checkout any book? If yes, enter its id: "
-        );
 
         assertEquals(firstBook.getStatus(), "available");
         assertEquals(secondBook.getStatus(), "available");
@@ -76,18 +66,13 @@ public class BooksOptionTest {
         String expectedBooksInformation = expectedBooksTable(firstBook, secondBook);
 
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
-        when(inputReaderWrapperMock.readInt()).thenReturn(firstBook.getId());
+        when(inputReaderWrapperMock.readInt()).thenReturn(firstBook.getId()).thenThrow(new IOException());
         OutputWriterWrapper outputWriterWrapperMock = Mockito.mock(OutputWriterWrapper.class);
         Library library = new Library(books);
 
         BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapperMock);
         String result = booksOption.action();
 
-        verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
-        verify(outputWriterWrapperMock, times(1)).writeStringln(
-                "Do you wish to checkout any book? If yes, enter its id: "
-        );
-        assertEquals(result, "Book already booked.");
         assertEquals(firstBook.getStatus(), "booked");
         assertEquals(secondBook.getStatus(), "available");
     }

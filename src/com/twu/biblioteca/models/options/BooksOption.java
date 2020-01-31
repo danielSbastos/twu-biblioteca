@@ -48,20 +48,20 @@ public class BooksOption implements IOption {
     }
 
     // TODO: Move to its own class
-    private static void askReturnBook(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
-        outputWriterWrapper.writeString("Do you wish to return a book? If yes, enter its id or press enter to continue: ");
-        try {
-            int bookId = inputReaderWrapper.readInt();
-            outputWriterWrapper.writeStringln(library.returnBook(bookId));
-        } catch (IOException | NumberFormatException e) {}
-    }
-
-    // TODO: Move to its own class
     private static void askCheckoutBook(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
         outputWriterWrapper.writeString("Do you wish to checkout any book? If yes, enter its id or press enter to continue: ");
         try {
             int bookId = inputReaderWrapper.readInt();
             outputWriterWrapper.writeStringln(library.checkoutBook(bookId));
+        } catch (IOException | NumberFormatException e) {}
+    }
+
+    // TODO: Move to its own class
+    private static void askReturnBook(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
+        outputWriterWrapper.writeString("Do you wish to return a book? If yes, enter its id or press enter to continue: ");
+        try {
+            int bookId = inputReaderWrapper.readInt();
+            outputWriterWrapper.writeStringln(library.returnBook(bookId));
         } catch (IOException | NumberFormatException e) {}
     }
 }
