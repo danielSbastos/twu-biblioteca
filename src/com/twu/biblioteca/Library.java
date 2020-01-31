@@ -13,6 +13,10 @@ public class Library {
         this.books = books;
     }
 
+    public List<Book> listBooks() {
+        return this.books;
+    }
+
     public void checkoutBook(int bookId) {
         Book matchedBook = this.books
                                .stream()

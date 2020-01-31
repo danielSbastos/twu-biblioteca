@@ -1,83 +1,72 @@
 package com.twu.biblioteca.models.options;
 
+import com.twu.biblioteca.Library;
+import com.twu.biblioteca.lib.InputReaderWrapper;
+import com.twu.biblioteca.lib.OutputWriterWrapper;
 import com.twu.biblioteca.models.Book;
 
 import org.junit.Test;
+import org.mockito.Mockito;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 
 public class BookListTest {
-//    @Test
-//    public void getInformationReturnsBooksInformation()
-//    {
-//        List<Book> books = new ArrayList<>();
-//
-//        int book1Id = 1;
-//        String book1Title = "Book1";
-//        String book1Author = "Author1";
-//        int book1PublicationYear = 1945;
-//
-//        int book2Id = 2;
-//        String book2Title = "Book2";
-//        String book2Author = "Author2";
-//        int book2PublicationYear = 1945;
-//
-//        books.add(new Book(book1Id, book1Title, book1Author, book1PublicationYear));
-//        books.add(new Book(book2Id, book2Title, book2Author, book2PublicationYear));
-//
-//        BookList bookList = new BookList(books);
-//        String booksInformation = bookList.action();
-//
-//        String expectedBooksInformation = "";
-//        expectedBooksInformation +=  String.format("Id: %s | Title: %s | Author: %s | Publication Year: %s\n",
-//                                                    book1Id,
-//                                                    book1Title,
-//                                                    book1Author,
-//                                                    book1PublicationYear);
-//        expectedBooksInformation +=  String.format("Id: %s | Title: %s | Author: %s | Publication Year: %s\n",
-//                                                    book2Id,
-//                                                    book2Title,
-//                                                    book2Author,
-//                                                    book2PublicationYear);
-//
-//        assertEquals(booksInformation, expectedBooksInformation);
-//    }
-//
-//    @Test
-//    public void getInformationWithNoBooksReturnsEmptyString()
-//    {
-//        List<Book> books = new ArrayList<>();
-//        BookList bookList = new BookList(books);
-//
-//        String bookInformation = bookList.action();
-//
-//        String expectedInformation = "";
-//        assertEquals(bookInformation, expectedInformation);
-//    }
-//
-//    @Test
-//    public void getTitleReturnsBookListTitle()
-//    {
-//        List<Book> bookItems = new ArrayList<>();
-//        BookList bookList = new BookList(bookItems);
-//
-//        String title = bookList.getTitle();
-//
-//        String expectedTitle = "List of Books";
-//        assertEquals(title, expectedTitle);
-//    }
-//
-//    @Test
-//    public void getIdReturnsBookListId()
-//    {
-//        List<Book> bookItems = new ArrayList<>();
-//        BookList bookList = new BookList(bookItems);
-//
-//        int id = bookList.getId();
-//
-//        int expectedId = 1;
-//        assertEquals(id, expectedId);
-//    }
+    @Test
+    public void actionReturnsBooksInformation() throws IOException {
+        List<Book> books = buildBooks();
+        Book firstBook = books.get(0);
+        Book secondBook = books.get(1);
+
+        String expectedBooksInformation = expectedBooksTable(firstBook, secondBook);
+        assertEquals(firstBook.getStatus(), "available");
+        assertEquals(secondBook.getStatus(), "available");
+
+        InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
+        when(inputReaderWrapperMock.readInt()).thenReturn(books.get(0).getId());
+        OutputWriterWrapper outputWriterWrapperMock = Mockito.mock(OutputWriterWrapper.class);
+        Library library = new Library(books);
+
+        BookList bookList = new BookList(library, inputReaderWrapperMock, outputWriterWrapperMock);
+        bookList.action();
+
+        verify(outputWriterWrapperMock, times(1)).writeString(expectedBooksInformation);
+        verify(outputWriterWrapperMock, times(1)).writeString(
+                "Do you wish to checkout any book? If yes, enter its id: "
+        );
+        assertEquals(firstBook.getStatus(), "booked");
+        assertEquals(secondBook.getStatus(), "available");
+    }
+
+    private String expectedBooksTable(Book firstBook, Book secondBook) {
+        String expectedBooksInformation = "";
+        expectedBooksInformation += String.format("Id: %s | Title: %s | Author: %s | Publication Year: %s | Status: %s\n",
+                firstBook.getId(),
+                firstBook.getTitle(),
+                firstBook.getAuthor(),
+                firstBook.getPublicationYear(),
+                firstBook.getStatus()
+        );
+        expectedBooksInformation += String.format("Id: %s | Title: %s | Author: %s | Publication Year: %s | Status: %s\n",
+                secondBook.getId(),
+                secondBook.getTitle(),
+                secondBook.getAuthor(),
+                secondBook.getPublicationYear(),
+                secondBook.getStatus()
+        );
+
+        return expectedBooksInformation;
+    }
+
+    private List<Book> buildBooks() {
+        List<Book> books = new ArrayList<>();
+        books.add(new Book(1, "Book1", "Author1", 2000));
+        books.add(new Book(2, "Book2", "Author2", 2000));
+
+        return books;
+    }
 }
