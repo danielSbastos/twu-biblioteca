@@ -8,13 +8,13 @@ import com.twu.biblioteca.models.Book;
 
 import java.io.IOException;
 
-public class BookList implements IOption {
+public class BooksOption implements IOption {
 
     private Library library;
     private InputReaderWrapper inputReaderWrapper;
     private OutputWriterWrapper outputWriterWrapper;
 
-    public BookList(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
+    public BooksOption(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
         this.library = library;
         this.inputReaderWrapper = inputReaderWrapper;
         this.outputWriterWrapper = outputWriterWrapper;

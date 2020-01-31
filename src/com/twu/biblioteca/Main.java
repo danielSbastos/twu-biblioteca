@@ -5,7 +5,7 @@ import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
 import com.twu.biblioteca.lib.SystemWrapper;
 import com.twu.biblioteca.models.Book;
-import com.twu.biblioteca.models.options.BookList;
+import com.twu.biblioteca.models.options.BooksOption;
 import com.twu.biblioteca.models.options.Quit;
 
 import java.io.IOException;
@@ -54,7 +54,7 @@ public class Main {
         books.add(new Book(2, "Book2", "Book2 author", 1945));
         Library library = new Library(books);
 
-        IOption bookListOption = new BookList(library, new InputReaderWrapper(), new OutputWriterWrapper());
+        IOption bookListOption = new BooksOption(library, new InputReaderWrapper(), new OutputWriterWrapper());
         IOption quitOption = new Quit(new SystemWrapper());
 
         List<IOption> options = new ArrayList<>();

@@ -4,7 +4,7 @@ import com.twu.biblioteca.interfaces.IOption;
 import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
 import com.twu.biblioteca.models.Book;
-import com.twu.biblioteca.models.options.BookList;
+import com.twu.biblioteca.models.options.BooksOption;
 
 import org.junit.Test;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class MenuTest {
     {
         List<Book> books = new ArrayList<>();
         Library library = new Library(books);
-        IOption bookListOption = new BookList(library, new InputReaderWrapper(), new OutputWriterWrapper());
+        IOption bookListOption = new BooksOption(library, new InputReaderWrapper(), new OutputWriterWrapper());
 
         List<IOption> options = new ArrayList<>();
         options.add(bookListOption);
@@ -38,7 +38,7 @@ public class MenuTest {
     {
         List<Book> books = new ArrayList<>();
         Library library = new Library(books);
-        IOption option = new BookList(library, new InputReaderWrapper(), new OutputWriterWrapper());
+        IOption option = new BooksOption(library, new InputReaderWrapper(), new OutputWriterWrapper());
 
         List<IOption> options = new ArrayList<>();
         options.add(option);
@@ -56,7 +56,7 @@ public class MenuTest {
     {
         List<Book> books = new ArrayList<>();
         Library library = new Library(books);
-        IOption option = new BookList(library, new InputReaderWrapper(), new OutputWriterWrapper());
+        IOption option = new BooksOption(library, new InputReaderWrapper(), new OutputWriterWrapper());
 
         List<IOption> options = new ArrayList<>();
         options.add(option);
@@ -70,7 +70,7 @@ public class MenuTest {
     public void executeChosenOptionReturnsChosen()
     {
         List<Book> books = new ArrayList<>();
-        IOption mockedBookListOption = Mockito.mock(BookList.class);
+        IOption mockedBookListOption = Mockito.mock(BooksOption.class);
         when(mockedBookListOption.getId()).thenCallRealMethod();
 
         List<IOption> options = new ArrayList<>();
