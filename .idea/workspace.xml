@@ -3,14 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f6e60e6d-d818-4863-b077-77538381485e" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/models/options/CheckoutBook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/Library.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/Library.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/models/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/models/Book.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/models/options/BookList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/models/options/BookList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/LibraryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/LibraryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/models/BookTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/models/BookTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/models/options/BookListTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/models/options/BookListTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/models/options/CheckoutBookOptionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/models/options/CheckoutBookTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,26 +164,26 @@
       <screen x="0" y="23" width="1680" height="947" />
     </state>
     <state x="566" y="199" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor/0.23.1680.947@0.23.1680.947" timestamp="1580217828801" />
-    <state width="1750" height="303" key="GridCell.Tab.0.bottom" timestamp="1580413531850">
+    <state width="1750" height="303" key="GridCell.Tab.0.bottom" timestamp="1580478892342">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state width="1630" height="326" key="GridCell.Tab.0.bottom/0.23.1680.947@0.23.1680.947" timestamp="1580246512370" />
-    <state width="1750" height="303" key="GridCell.Tab.0.bottom/0.23.1792.1097@0.23.1792.1097" timestamp="1580413531850" />
-    <state width="1750" height="303" key="GridCell.Tab.0.center" timestamp="1580413531850">
+    <state width="1750" height="303" key="GridCell.Tab.0.bottom/0.23.1792.1097@0.23.1792.1097" timestamp="1580478892342" />
+    <state width="1750" height="303" key="GridCell.Tab.0.center" timestamp="1580478892341">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state width="1630" height="326" key="GridCell.Tab.0.center/0.23.1680.947@0.23.1680.947" timestamp="1580246512369" />
-    <state width="1750" height="303" key="GridCell.Tab.0.center/0.23.1792.1097@0.23.1792.1097" timestamp="1580413531850" />
-    <state width="1750" height="303" key="GridCell.Tab.0.left" timestamp="1580413531849">
+    <state width="1750" height="303" key="GridCell.Tab.0.center/0.23.1792.1097@0.23.1792.1097" timestamp="1580478892341" />
+    <state width="1750" height="303" key="GridCell.Tab.0.left" timestamp="1580478892340">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state width="1630" height="326" key="GridCell.Tab.0.left/0.23.1680.947@0.23.1680.947" timestamp="1580246512369" />
-    <state width="1750" height="303" key="GridCell.Tab.0.left/0.23.1792.1097@0.23.1792.1097" timestamp="1580413531849" />
-    <state width="1750" height="303" key="GridCell.Tab.0.right" timestamp="1580413531850">
+    <state width="1750" height="303" key="GridCell.Tab.0.left/0.23.1792.1097@0.23.1792.1097" timestamp="1580478892340" />
+    <state width="1750" height="303" key="GridCell.Tab.0.right" timestamp="1580478892341">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state width="1630" height="326" key="GridCell.Tab.0.right/0.23.1680.947@0.23.1680.947" timestamp="1580246512370" />
-    <state width="1750" height="303" key="GridCell.Tab.0.right/0.23.1792.1097@0.23.1792.1097" timestamp="1580413531850" />
+    <state width="1750" height="303" key="GridCell.Tab.0.right/0.23.1792.1097@0.23.1792.1097" timestamp="1580478892341" />
     <state x="334" y="23" key="SettingsEditor" timestamp="1580388388802">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
