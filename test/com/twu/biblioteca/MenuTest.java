@@ -1,6 +1,8 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.interfaces.IOption;
+import com.twu.biblioteca.lib.InputReaderWrapper;
+import com.twu.biblioteca.lib.OutputWriterWrapper;
 import com.twu.biblioteca.models.Book;
 import com.twu.biblioteca.models.options.BookList;
 
@@ -19,7 +21,9 @@ public class MenuTest {
     public void getOptionsReturnOptions()
     {
         List<Book> books = new ArrayList<>();
-        IOption bookListOption = new BookList(books);
+        Library library = new Library(books);
+        IOption bookListOption = new BookList(library, new InputReaderWrapper(), new OutputWriterWrapper());
+
         List<IOption> options = new ArrayList<>();
         options.add(bookListOption);
 
@@ -33,7 +37,9 @@ public class MenuTest {
     public void getOptionByIdWithValidIdReturnsChosenOption()
     {
         List<Book> books = new ArrayList<>();
-        IOption option = new BookList(books);
+        Library library = new Library(books);
+        IOption option = new BookList(library, new InputReaderWrapper(), new OutputWriterWrapper());
+
         List<IOption> options = new ArrayList<>();
         options.add(option);
 
@@ -49,7 +55,9 @@ public class MenuTest {
     public void getOptionByIdWithInvalidIdThrowsAnError()
     {
         List<Book> books = new ArrayList<>();
-        IOption option = new BookList(books);
+        Library library = new Library(books);
+        IOption option = new BookList(library, new InputReaderWrapper(), new OutputWriterWrapper());
+
         List<IOption> options = new ArrayList<>();
         options.add(option);
 
