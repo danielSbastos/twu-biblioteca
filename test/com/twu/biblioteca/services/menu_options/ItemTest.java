@@ -61,11 +61,14 @@ public class ItemTest {
         item.action();
 
         verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
-        verify(outputWriterWrapperMock, times(1)).writeString(
-                "Enter item ID to checkout: "
+        verify(outputWriterWrapperMock, times(1)).writeStringln(
+                "1. Checkout item"
         );
         verify(outputWriterWrapperMock, times(1)).writeStringln(
-                "Successfully booked book."
+                "2. Return item"
+        );
+        verify(outputWriterWrapperMock, times(1)).writeStringln(
+                "Successfully checked out item."
         );
     }
 
@@ -105,12 +108,13 @@ public class ItemTest {
         Item item = new Item(1, "List", library, inputReaderWrapperMock, outputWriterWrapperMock, subMenu);
         item.action();
 
+
         verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
-        verify(outputWriterWrapperMock, times(0)).writeString(
-                "Do you wish to checkout any book? If yes, enter its id or press enter to continue: "
+        verify(outputWriterWrapperMock, times(1)).writeStringln(
+                "1. Checkout item"
         );
-        verify(outputWriterWrapperMock, times(0)).writeStringln(
-                "Successfully booked book."
+        verify(outputWriterWrapperMock, times(1)).writeStringln(
+                "2. Return item"
         );
     }
 
@@ -153,16 +157,19 @@ public class ItemTest {
         item.action();
 
         verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
-        verify(outputWriterWrapperMock, times(1)).writeString(
-                "Enter item ID to checkout: "
+        verify(outputWriterWrapperMock, times(1)).writeStringln(
+                "1. Checkout item"
         );
         verify(outputWriterWrapperMock, times(1)).writeStringln(
-                "Book already booked."
+                "2. Return item"
+        );
+        verify(outputWriterWrapperMock, times(1)).writeStringln(
+                "Item already checked out."
         );
     }
 
     @Test
-    public void returnBookChangesBookStatus() throws IOException {
+    public void returnItemChangesBookStatus() throws IOException {
         List<IItem> books = buildBooks();
         IItem firstBook = books.get(0);
         firstBook.setStatus("booked");
@@ -182,10 +189,13 @@ public class ItemTest {
     }
 
     @Test
-    public void returnBookShowsSuccessMessage() throws IOException {
+    public void returnItemShowsSuccessMessage() throws IOException {
         List<IItem> books = buildBooks();
         IItem firstBook = books.get(0);
         firstBook.setStatus("booked");
+        IItem secondBook = books.get(1);
+
+        String expectedBooksInformation = expectedBooksTable(firstBook, secondBook);
 
         Library library = new Library(books);
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
@@ -197,16 +207,20 @@ public class ItemTest {
         Item item = new Item(1, "List", library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
         item.action();
 
-        verify(outputWriterWrapper, times(1)).writeString(
-                "Enter item ID to return: "
+        verify(outputWriterWrapper, times(1)).writeStringln(expectedBooksInformation);
+        verify(outputWriterWrapper, times(1)).writeStringln(
+                "1. Checkout item"
         );
         verify(outputWriterWrapper, times(1)).writeStringln(
-                "Successfully returned book."
+                "2. Return item"
+        );
+        verify(outputWriterWrapper, times(1)).writeStringln(
+                "Successfully returned item."
         );
     }
 
     @Test
-    public void returnBookDoesNotChangeAlreadyReturnedBookStatus() throws IOException {
+    public void returnItemDoesNotChangeAlreadyReturnedBookStatus() throws IOException {
         List<IItem> books = buildBooks();
         IItem firstBook = books.get(0);
         firstBook.setStatus("booked");
@@ -227,10 +241,13 @@ public class ItemTest {
     }
 
     @Test
-    public void returnBookShowsAlreadyReturnedBookMessage() throws IOException {
+    public void returnItemShowsAlreadyReturnedBookMessage() throws IOException {
         List<IItem> books = buildBooks();
         IItem firstBook = books.get(0);
         firstBook.setStatus("available");
+        IItem secondBook = books.get(1);
+
+        String expectedBooksInformation = expectedBooksTable(firstBook, secondBook);
 
         Library library = new Library(books);
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
@@ -242,11 +259,15 @@ public class ItemTest {
         Item item = new Item(1, "List", library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
         item.action();
 
-        verify(outputWriterWrapper, times(1)).writeString(
-                "Enter item ID to return: "
+        verify(outputWriterWrapper, times(1)).writeStringln(expectedBooksInformation);
+        verify(outputWriterWrapper, times(1)).writeStringln(
+                "1. Checkout item"
         );
         verify(outputWriterWrapper, times(1)).writeStringln(
-                "Book was already returned."
+                "2. Return item"
+        );
+        verify(outputWriterWrapper, times(1)).writeStringln(
+                "Item already returned."
         );
     }
 

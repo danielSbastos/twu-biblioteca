@@ -35,7 +35,7 @@ public class ReturnItemTest {
         verify(outputWriterWrapperMock, times(1)).writeString(
                 "Enter item ID to return: "
         );
-        assertEquals(result, "Book was already returned.");
+        assertEquals(result, "Item already returned.");
     }
 
     @Test

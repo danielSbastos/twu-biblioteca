@@ -34,7 +34,7 @@ public class CheckoutItemTest {
         verify(outputWriterWrapperMock, times(1)).writeString(
                 "Enter item ID to checkout: "
         );
-        assertEquals(result, "Successfully booked book.");
+        assertEquals(result, "Successfully checked out item.");
     }
 
     @Test

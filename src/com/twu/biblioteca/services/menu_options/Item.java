@@ -35,7 +35,7 @@ public class Item implements IOption {
 
     public String action() {
         String information = "";
-        for (IItem item : this.library.listBooks()) {
+        for (IItem item : this.library.listItems()) {
             information += item.stringifyData();
         }
         this.outputWriterWrapper.writeStringln(information);
@@ -52,6 +52,7 @@ public class Item implements IOption {
             this.outputWriterWrapper.writeStringln(option.getId() + ". " + option.getTitle());
         }
 
+        this.outputWriterWrapper.writeString(">>> ");
         int chosenOptionId = this.inputReaderWrapper.readInt();
         String optionContent = menu.executeOption(chosenOptionId);
         this.outputWriterWrapper.writeStringln(optionContent);

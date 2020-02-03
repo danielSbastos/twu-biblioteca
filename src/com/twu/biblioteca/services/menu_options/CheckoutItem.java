@@ -31,7 +31,7 @@ public class CheckoutItem implements IOption {
 
         try {
             int bookId = this.inputReaderWrapper.readInt();
-            return this.library.checkoutBook(bookId);
+            return this.library.checkoutItem(bookId);
         } catch (IOException | NumberFormatException e) {}
 
         return "";

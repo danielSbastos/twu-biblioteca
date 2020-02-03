@@ -13,12 +13,12 @@ public class Library {
         this.items = items;
     }
 
-    public List<IItem> listBooks() {
+    public List<IItem> listItems() {
         return this.items;
     }
 
-    public String checkoutBook(int itemId) {
-        IItem item = findBook(itemId);
+    public String checkoutItem(int itemId) {
+        IItem item = findItem(itemId);
 
         if (alreadyBooked(item)) {
             return "Item already checked out.";
@@ -28,8 +28,8 @@ public class Library {
         return "Successfully checked out item.";
     }
 
-    public String returnBook(int itemId) {
-        IItem item = findBook(itemId);
+    public String returnItem(int itemId) {
+        IItem item = findItem(itemId);
 
         if (alreadyReturned(item)) {
             return "Item already returned.";
@@ -39,7 +39,7 @@ public class Library {
         return "Successfully returned item.";
     }
 
-    private IItem findBook(int itemId) {
+    private IItem findItem(int itemId) {
         return this.items
                .stream()
                .filter(book -> book.getId() == itemId)

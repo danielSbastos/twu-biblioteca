@@ -31,7 +31,7 @@ public class ReturnItem implements IOption {
 
         try {
             int bookId = this.inputReaderWrapper.readInt();
-            return this.library.returnBook(bookId);
+            return this.library.returnItem(bookId);
         } catch (IOException | NumberFormatException e) {}
 
         return "";

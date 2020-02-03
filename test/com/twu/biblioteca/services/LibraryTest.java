@@ -14,21 +14,21 @@ import static org.junit.Assert.assertThat;
 public class LibraryTest {
 
     @Test
-    public void checkoutBookSuccessfullyCheckoutsTheBook() {
+    public void checkoutItemSuccessfullyCheckoutsTheBook() {
         List<IItem> books = new ArrayList<>();
         Book book = new Book(1, "Book1", "Author1", 1999);
         books.add(book);
 
         Library library = new Library(books);
 
-        String result = library.checkoutBook(book.getId());
+        String result = library.checkoutItem(book.getId());
 
         assertThat(book.getStatus(), is("booked"));
-        assertThat(result, is("Successfully booked book."));
+        assertThat(result, is("Successfully checked out item."));
     }
 
     @Test
-    public void checkoutBookFailsToCheckoutBook() {
+    public void checkoutItemFailsTocheckoutItem() {
         List<IItem> books = new ArrayList<>();
         Book book = new Book(1, "Book1", "Author1", 1999);
         book.setStatus("booked");
@@ -36,9 +36,9 @@ public class LibraryTest {
 
         Library library = new Library(books);
 
-        String result = library.checkoutBook(book.getId());
+        String result = library.checkoutItem(book.getId());
 
-        assertThat(result, is("Book already booked."));
+        assertThat(result, is("Item already checked out."));
     }
 
     @Test
@@ -50,10 +50,10 @@ public class LibraryTest {
 
         Library library = new Library(books);
 
-        String result = library.returnBook(book.getId());
+        String result = library.returnItem(book.getId());
 
         assertThat(book.getStatus(), is("available"));
-        assertThat(result, is("Successfully returned book."));
+        assertThat(result, is("Successfully returned item."));
     }
 
 
@@ -66,8 +66,8 @@ public class LibraryTest {
 
         Library library = new Library(books);
 
-        String result = library.returnBook(book.getId());
+        String result = library.returnItem(book.getId());
 
-        assertThat(result, is("Book was already returned."));
+        assertThat(result, is("Item already returned."));
     }
 }

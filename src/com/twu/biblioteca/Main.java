@@ -12,6 +12,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Welcome welcome = new Welcome();
+
         new OutputWriterWrapper().writeStringln(welcome.showMessage());
 
         Menu menu = new MenuFactory().execute();
@@ -28,6 +29,7 @@ public class Main {
     private static void executeMainMenu(Menu menu) throws IOException {
         while (true) {
             showMenu(menu);
+            new OutputWriterWrapper().writeString(">>> ");
             int chosenOptionId = new InputReaderWrapper().readInt();
             String optionContent = menu.executeOption(chosenOptionId);
             new OutputWriterWrapper().writeStringln(optionContent);
