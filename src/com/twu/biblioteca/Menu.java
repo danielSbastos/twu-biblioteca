@@ -15,7 +15,7 @@ public class Menu {
         return this.options;
     }
 
-    //TODO: make it private
+    // TODO: make it private
     public IOption getOptionById(int id) throws IndexOutOfBoundsException {
         return this.options
                    .stream()
@@ -27,8 +27,5 @@ public class Menu {
     public String executeOption(int optionId) {
         IOption currentOption = this.getOptionById(optionId);
         return currentOption.action();
-    }
-
-    public void closeCurrentOption() {
     }
 }
