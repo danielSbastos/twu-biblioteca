@@ -1,4 +1,4 @@
-package com.twu.biblioteca.models.options;
+package com.twu.biblioteca.services.menu_options;
 
 import com.twu.biblioteca.interfaces.IOption;
 import com.twu.biblioteca.lib.SystemWrapper;
@@ -22,8 +22,7 @@ public class Quit implements IOption {
         return 2;
     }
 
-    public String action()
-    {
+    public String action() {
         this.systemWrapper.exit();
         return "Exiting system...";
     }
