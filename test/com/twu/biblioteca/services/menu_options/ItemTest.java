@@ -1,5 +1,6 @@
 package com.twu.biblioteca.services.menu_options;
 
+import com.twu.biblioteca.interfaces.IItem;
 import com.twu.biblioteca.interfaces.IOption;
 import com.twu.biblioteca.services.Library;
 import com.twu.biblioteca.lib.InputReaderWrapper;
@@ -23,9 +24,9 @@ public class ItemTest {
 
     @Test
     public void actionBooksBook() throws IOException {
-        List<Book> books = buildBooks();
-        Book firstBook = books.get(0);
-        Book secondBook = books.get(1);
+        List<IItem> books = buildBooks();
+        IItem firstBook = books.get(0);
+        IItem secondBook = books.get(1);
 
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
         OutputWriterWrapper outputWriterWrapper = new OutputWriterWrapper();
@@ -34,7 +35,7 @@ public class ItemTest {
 
         when(inputReaderWrapperMock.readInt()).thenReturn(checkoutItemId).thenReturn(firstBook.getId());
 
-        Item item = new Item(library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
+        Item item = new Item(1, "List", library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
         item.action();
 
         assertEquals(firstBook.getStatus(), "booked");
@@ -43,9 +44,9 @@ public class ItemTest {
 
     @Test
     public void actionPrintsBooksTableAndShowsSuccessBookingMessages() throws IOException {
-        List<Book> books = buildBooks();
-        Book firstBook = books.get(0);
-        Book secondBook = books.get(1);
+        List<IItem> books = buildBooks();
+        IItem firstBook = books.get(0);
+        IItem secondBook = books.get(1);
 
         String expectedBooksInformation = expectedBooksTable(firstBook, secondBook);
 
@@ -56,8 +57,8 @@ public class ItemTest {
 
         when(inputReaderWrapperMock.readInt()).thenReturn(checkoutItemId).thenReturn(firstBook.getId());
 
-        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapperMock, subMenu);
-        booksOption.action();
+        Item item = new Item(1, "List", library, inputReaderWrapperMock, outputWriterWrapperMock, subMenu);
+        item.action();
 
         verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
         verify(outputWriterWrapperMock, times(1)).writeString(
@@ -70,9 +71,9 @@ public class ItemTest {
 
     @Test
     public void actionDoesNotBookBook() throws IOException {
-        List<Book> books = buildBooks();
-        Book firstBook = books.get(0);
-        Book secondBook = books.get(1);
+        List<IItem> books = buildBooks();
+        IItem firstBook = books.get(0);
+        IItem secondBook = books.get(1);
 
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
         OutputWriterWrapper outputWriterWrapper = new OutputWriterWrapper();
@@ -80,8 +81,8 @@ public class ItemTest {
         Library library = new Library(books);
         Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapper);
 
-        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
-        booksOption.action();
+        Item item = new Item(1, "List", library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
+        item.action();
 
         assertEquals(firstBook.getStatus(), "available");
         assertEquals(secondBook.getStatus(), "available");
@@ -89,9 +90,9 @@ public class ItemTest {
 
     @Test
     public void actionPrintsBooksTableAndShowsNoSuccessBookingMessage() throws IOException {
-        List<Book> books = buildBooks();
-        Book firstBook = books.get(0);
-        Book secondBook = books.get(1);
+        List<IItem> books = buildBooks();
+        IItem firstBook = books.get(0);
+        IItem secondBook = books.get(1);
 
         String expectedBooksInformation = expectedBooksTable(firstBook, secondBook);
 
@@ -101,8 +102,8 @@ public class ItemTest {
         Library library = new Library(books);
         Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapperMock);
 
-        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapperMock, subMenu);
-        booksOption.action();
+        Item item = new Item(1, "List", library, inputReaderWrapperMock, outputWriterWrapperMock, subMenu);
+        item.action();
 
         verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
         verify(outputWriterWrapperMock, times(0)).writeString(
@@ -115,10 +116,10 @@ public class ItemTest {
 
     @Test
     public void actionDoesBookNotAlreadyBookedBook() throws IOException {
-        List<Book> books = buildBooks();
-        Book firstBook = books.get(0);
+        List<IItem> books = buildBooks();
+        IItem firstBook = books.get(0);
         firstBook.setStatus("booked");
-        Book secondBook = books.get(1);
+        IItem secondBook = books.get(1);
 
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
         OutputWriterWrapper outputWriterWrapper = new OutputWriterWrapper();
@@ -126,8 +127,8 @@ public class ItemTest {
         Library library = new Library(books);
         Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapper);
 
-        Item booksOption = new Item(library, inputReaderWrapperMock, new OutputWriterWrapper(), subMenu);
-        booksOption.action();
+        Item item = new Item(1, "List", library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
+        item.action();
 
         assertEquals(firstBook.getStatus(), "booked");
         assertEquals(secondBook.getStatus(), "available");
@@ -135,10 +136,10 @@ public class ItemTest {
 
     @Test
     public void actionShowsAlreadyBookedMessage() throws IOException {
-        List<Book> books = buildBooks();
-        Book firstBook = books.get(0);
+        List<IItem> books = buildBooks();
+        IItem firstBook = books.get(0);
         firstBook.setStatus("booked");
-        Book secondBook = books.get(1);
+        IItem secondBook = books.get(1);
 
         String expectedBooksInformation = expectedBooksTable(firstBook, secondBook);
 
@@ -148,8 +149,8 @@ public class ItemTest {
         Library library = new Library(books);
         Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapperMock);
 
-        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapperMock, subMenu);
-        booksOption.action();
+        Item item = new Item(1, "List", library, inputReaderWrapperMock, outputWriterWrapperMock, subMenu);
+        item.action();
 
         verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
         verify(outputWriterWrapperMock, times(1)).writeString(
@@ -162,10 +163,10 @@ public class ItemTest {
 
     @Test
     public void returnBookChangesBookStatus() throws IOException {
-        List<Book> books = buildBooks();
-        Book firstBook = books.get(0);
+        List<IItem> books = buildBooks();
+        IItem firstBook = books.get(0);
         firstBook.setStatus("booked");
-        Book secondBook = books.get(1);
+        IItem secondBook = books.get(1);
 
         Library library = new Library(books);
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
@@ -173,8 +174,8 @@ public class ItemTest {
         when(inputReaderWrapperMock.readInt()).thenReturn(returnItemId).thenReturn(firstBook.getId());
         Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapper);
 
-        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
-        booksOption.action();
+        Item item = new Item(1, "List", library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
+        item.action();
 
         assertEquals(firstBook.getStatus(), "available");
         assertEquals(secondBook.getStatus(), "available");
@@ -182,8 +183,8 @@ public class ItemTest {
 
     @Test
     public void returnBookShowsSuccessMessage() throws IOException {
-        List<Book> books = buildBooks();
-        Book firstBook = books.get(0);
+        List<IItem> books = buildBooks();
+        IItem firstBook = books.get(0);
         firstBook.setStatus("booked");
 
         Library library = new Library(books);
@@ -193,8 +194,8 @@ public class ItemTest {
 
         when(inputReaderWrapperMock.readInt()).thenReturn(returnItemId).thenReturn(firstBook.getId());
 
-        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
-        booksOption.action();
+        Item item = new Item(1, "List", library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
+        item.action();
 
         verify(outputWriterWrapper, times(1)).writeString(
                 "Enter item ID to return: "
@@ -206,10 +207,10 @@ public class ItemTest {
 
     @Test
     public void returnBookDoesNotChangeAlreadyReturnedBookStatus() throws IOException {
-        List<Book> books = buildBooks();
-        Book firstBook = books.get(0);
+        List<IItem> books = buildBooks();
+        IItem firstBook = books.get(0);
         firstBook.setStatus("booked");
-        Book secondBook = books.get(1);
+        IItem secondBook = books.get(1);
 
         Library library = new Library(books);
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
@@ -218,8 +219,8 @@ public class ItemTest {
 
         when(inputReaderWrapperMock.readInt()).thenReturn(returnItemId).thenReturn(firstBook.getId());
 
-        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
-        booksOption.action();
+        Item item = new Item(1, "List", library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
+        item.action();
 
         assertEquals(firstBook.getStatus(), "available");
         assertEquals(secondBook.getStatus(), "available");
@@ -227,8 +228,8 @@ public class ItemTest {
 
     @Test
     public void returnBookShowsAlreadyReturnedBookMessage() throws IOException {
-        List<Book> books = buildBooks();
-        Book firstBook = books.get(0);
+        List<IItem> books = buildBooks();
+        IItem firstBook = books.get(0);
         firstBook.setStatus("available");
 
         Library library = new Library(books);
@@ -238,8 +239,8 @@ public class ItemTest {
 
         when(inputReaderWrapperMock.readInt()).thenReturn(returnItemId).thenReturn(firstBook.getId());
 
-        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
-        booksOption.action();
+        Item item = new Item(1, "List", library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
+        item.action();
 
         verify(outputWriterWrapper, times(1)).writeString(
                 "Enter item ID to return: "
@@ -249,28 +250,16 @@ public class ItemTest {
         );
     }
 
-    private String expectedBooksTable(Book firstBook, Book secondBook) {
+    private String expectedBooksTable(IItem firstBook, IItem secondBook) {
         String expectedBooksInformation = "";
-        expectedBooksInformation += String.format("Id: %s | Title: %s | Author: %s | Publication Year: %s | Status: %s\n",
-                firstBook.getId(),
-                firstBook.getTitle(),
-                firstBook.getAuthor(),
-                firstBook.getPublicationYear(),
-                firstBook.getStatus()
-        );
-        expectedBooksInformation += String.format("Id: %s | Title: %s | Author: %s | Publication Year: %s | Status: %s\n",
-                secondBook.getId(),
-                secondBook.getTitle(),
-                secondBook.getAuthor(),
-                secondBook.getPublicationYear(),
-                secondBook.getStatus()
-        );
+        expectedBooksInformation += firstBook.stringifyData();
+        expectedBooksInformation += secondBook.stringifyData();
 
         return expectedBooksInformation;
     }
 
-    private List<Book> buildBooks() {
-        List<Book> books = new ArrayList<>();
+    private List<IItem> buildBooks() {
+        List<IItem> books = new ArrayList<>();
         books.add(new Book(1, "Book1", "Author1", 2000));
         books.add(new Book(2, "Book2", "Author2", 2000));
 

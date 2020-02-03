@@ -1,22 +1,32 @@
 package com.twu.biblioteca.services.menu_options;
 
+import com.twu.biblioteca.interfaces.IItem;
 import com.twu.biblioteca.services.Library;
 import com.twu.biblioteca.interfaces.IOption;
 import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
-import com.twu.biblioteca.models.Book;
 import com.twu.biblioteca.services.Menu;
 
 import java.io.IOException;
-import java.util.List;
 
 public class Item implements IOption {
+    private int id;
+    private String title;
     private Library library;
     private InputReaderWrapper inputReaderWrapper;
     private OutputWriterWrapper outputWriterWrapper;
     private Menu subMenu;
 
-    public Item(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper, Menu subMenu) {
+    public Item(
+            int id,
+            String title,
+            Library library,
+            InputReaderWrapper inputReaderWrapper,
+            OutputWriterWrapper outputWriterWrapper,
+            Menu subMenu
+    ) {
+        this.id = id;
+        this.title = title;
         this.library = library;
         this.inputReaderWrapper = inputReaderWrapper;
         this.outputWriterWrapper = outputWriterWrapper;
@@ -25,14 +35,8 @@ public class Item implements IOption {
 
     public String action() {
         String information = "";
-        for (Book book : this.library.listBooks()) {
-            information += String.format("Id: %s | Title: %s | Author: %s | Publication Year: %s | Status: %s\n",
-                book.getId(),
-                book.getTitle(),
-                book.getAuthor(),
-                book.getPublicationYear(),
-                book.getStatus()
-            );
+        for (IItem item : this.library.listBooks()) {
+            information += item.stringifyData();
         }
         this.outputWriterWrapper.writeStringln(information);
 
@@ -54,10 +58,10 @@ public class Item implements IOption {
     }
 
     public int getId() {
-        return 1;
+        return this.id;
     }
 
     public String getTitle() {
-        return "List of Books";
+        return this.title;
     }
 }

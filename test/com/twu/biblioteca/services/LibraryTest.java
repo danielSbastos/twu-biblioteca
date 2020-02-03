@@ -1,8 +1,8 @@
 package com.twu.biblioteca.services;
 
+import com.twu.biblioteca.interfaces.IItem;
 import com.twu.biblioteca.models.Book;
 
-import com.twu.biblioteca.services.Library;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class LibraryTest {
 
     @Test
     public void checkoutBookSuccessfullyCheckoutsTheBook() {
-        List<Book> books = new ArrayList<>();
+        List<IItem> books = new ArrayList<>();
         Book book = new Book(1, "Book1", "Author1", 1999);
         books.add(book);
 
@@ -29,7 +29,7 @@ public class LibraryTest {
 
     @Test
     public void checkoutBookFailsToCheckoutBook() {
-        List<Book> books = new ArrayList<>();
+        List<IItem> books = new ArrayList<>();
         Book book = new Book(1, "Book1", "Author1", 1999);
         book.setStatus("booked");
         books.add(book);
@@ -43,7 +43,7 @@ public class LibraryTest {
 
     @Test
     public void returnsBookSuccessfullyReturnsBook() {
-        List<Book> books = new ArrayList<>();
+        List<IItem> books = new ArrayList<>();
         Book book = new Book(1, "Book1", "Author1", 1999);
         book.setStatus("booked");
         books.add(book);
@@ -59,7 +59,7 @@ public class LibraryTest {
 
     @Test
     public void returnsBookFailsToReturnsBook() {
-        List<Book> books = new ArrayList<>();
+        List<IItem> books = new ArrayList<>();
         Book book = new Book(1, "Book1", "Author1", 1999);
         book.setStatus("available");
         books.add(book);

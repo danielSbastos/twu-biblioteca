@@ -1,9 +1,9 @@
 package com.twu.biblioteca.services;
 
+import com.twu.biblioteca.interfaces.IItem;
 import com.twu.biblioteca.interfaces.IOption;
 import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
-import com.twu.biblioteca.models.Book;
 import com.twu.biblioteca.services.menu_options.Item;
 
 import org.junit.Test;
@@ -20,11 +20,11 @@ public class MenuTest {
     @Test
     public void getOptionsReturnOptions()
     {
-        List<Book> books = new ArrayList<>();
+        List<IItem> books = new ArrayList<>();
         Library library = new Library(books);
         Menu subMenu = new Menu(new ArrayList<>());
 
-        IOption bookListOption = new Item(library, new InputReaderWrapper(), new OutputWriterWrapper(), subMenu);
+        IOption bookListOption = new Item(1, "List", library, new InputReaderWrapper(), new OutputWriterWrapper(), subMenu);
 
         List<IOption> options = new ArrayList<>();
         options.add(bookListOption);
@@ -38,11 +38,11 @@ public class MenuTest {
     @Test
     public void getOptionByIdWithValidIdReturnsChosenOption()
     {
-        List<Book> books = new ArrayList<>();
+        List<IItem> books = new ArrayList<>();
         Library library = new Library(books);
         Menu subMenu = new Menu(new ArrayList<>());
 
-        IOption option = new Item(library, new InputReaderWrapper(), new OutputWriterWrapper(), subMenu);
+        IOption option = new Item(1, "List", library, new InputReaderWrapper(), new OutputWriterWrapper(), subMenu);
 
         List<IOption> options = new ArrayList<>();
         options.add(option);
@@ -58,11 +58,11 @@ public class MenuTest {
     @Test(expected = IndexOutOfBoundsException.class)
     public void getOptionByIdWithInvalidIdThrowsAnError()
     {
-        List<Book> books = new ArrayList<>();
+        List<IItem> books = new ArrayList<>();
         Library library = new Library(books);
         Menu subMenu = new Menu(new ArrayList<>());
 
-        IOption option = new Item(library, new InputReaderWrapper(), new OutputWriterWrapper(), subMenu);
+        IOption option = new Item(1, "List", library, new InputReaderWrapper(), new OutputWriterWrapper(), subMenu);
 
         List<IOption> options = new ArrayList<>();
         options.add(option);
@@ -75,9 +75,8 @@ public class MenuTest {
     @Test
     public void executeChosenOptionReturnsChosen()
     {
-        List<Book> books = new ArrayList<>();
         IOption mockedBookListOption = Mockito.mock(Item.class);
-        when(mockedBookListOption.getId()).thenCallRealMethod();
+        when(mockedBookListOption.getId()).thenReturn(1);
 
         List<IOption> options = new ArrayList<>();
         options.add(mockedBookListOption);
