@@ -6,13 +6,15 @@ import com.twu.biblioteca.lib.OutputWriterWrapper;
 import com.twu.biblioteca.services.Menu;
 
 import java.io.IOException;
-import java.util.List;
 
 
 public class Main {
+    private static OutputWriterWrapper outputWriterWrapper = new OutputWriterWrapper();
+    private static InputReaderWrapper inputReaderWrapper = new InputReaderWrapper();
+
     public static void main(String[] args) {
         Welcome welcome = new Welcome();
-        new OutputWriterWrapper().writeStringln(welcome.showMessage());
+        outputWriterWrapper.writeStringln(welcome.showMessage());
 
         Menu menu = new MenuFactory().execute();
 
@@ -28,17 +30,16 @@ public class Main {
     private static void executeMainMenu(Menu menu) throws IOException {
         while (true) {
             showMenu(menu);
-            int chosenOptionId = new InputReaderWrapper().readInt();
+            outputWriterWrapper.writeString(">>> ");
+            int chosenOptionId = inputReaderWrapper.readInt();
             String optionContent = menu.executeOption(chosenOptionId);
-            new OutputWriterWrapper().writeStringln(optionContent);
+            outputWriterWrapper.writeStringln(optionContent);
         }
     }
 
     private static void showMenu(Menu menu) {
-        List<IOption> menuOptions = menu.getOptions();
-
-        for (IOption option : menuOptions) {
-            new OutputWriterWrapper().writeStringln(option.getId() + ". " + option.getTitle());
+        for (IOption option : menu.getOptions()) {
+            outputWriterWrapper.writeStringln(option.getId() + ". " + option.getTitle());
         }
     }
 }

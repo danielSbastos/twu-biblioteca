@@ -1,5 +1,6 @@
 package com.twu.biblioteca.services.menu_options;
 
+import com.twu.biblioteca.interfaces.IItem;
 import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
 import com.twu.biblioteca.models.Book;
@@ -18,8 +19,8 @@ public class CheckoutItemTest {
 
     @Test
     public void actionCheckoutsBook() throws IOException {
-        List<Book> books = buildBooks();
-        Book firstBook = books.get(0);
+        List<IItem> books = buildBooks();
+        IItem firstBook = books.get(0);
 
         Library library = new Library(books);
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
@@ -33,7 +34,7 @@ public class CheckoutItemTest {
         verify(outputWriterWrapperMock, times(1)).writeString(
                 "Enter item ID to checkout: "
         );
-        assertEquals(result, "Successfully booked book.");
+        assertEquals(result, "Successfully checked out item.");
     }
 
     @Test
@@ -54,8 +55,8 @@ public class CheckoutItemTest {
         assertEquals(checkoutItem.getId(), 1);
     }
 
-    private List<Book> buildBooks() {
-        List<Book> books = new ArrayList<>();
+    private List<IItem> buildBooks() {
+        List<IItem> books = new ArrayList<>();
         books.add(new Book(1, "Book1", "Author1", 2000));
         books.add(new Book(2, "Book2", "Author2", 2000));
 

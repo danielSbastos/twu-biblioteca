@@ -1,6 +1,8 @@
 package com.twu.biblioteca.models;
 
-public class Book {
+import com.twu.biblioteca.interfaces.IItem;
+
+public class Book implements IItem {
     private int id;
     private String title;
     private String author;
@@ -40,5 +42,15 @@ public class Book {
 
     public String getStatus() {
         return this.status;
+    }
+
+    public String stringifyData() {
+        return String.format("Id: %s | Title: %s | Author: %s | Publication Year: %s | Status: %s\n",
+                this.id,
+                this.title,
+                this.author,
+                this.publicationYear,
+                this.status
+        );
     }
 }

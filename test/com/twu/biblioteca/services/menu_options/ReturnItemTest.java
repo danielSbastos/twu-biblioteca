@@ -1,5 +1,6 @@
 package com.twu.biblioteca.services.menu_options;
 
+import com.twu.biblioteca.interfaces.IItem;
 import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
 import com.twu.biblioteca.models.Book;
@@ -18,8 +19,8 @@ public class ReturnItemTest {
 
     @Test
     public void actionReturnsBook() throws IOException {
-        List<Book> books = buildBooks();
-        Book firstBook = books.get(0);
+        List<IItem> books = buildBooks();
+        IItem firstBook = books.get(0);
         firstBook.setStatus("available");
 
         Library library = new Library(books);
@@ -34,7 +35,7 @@ public class ReturnItemTest {
         verify(outputWriterWrapperMock, times(1)).writeString(
                 "Enter item ID to return: "
         );
-        assertEquals(result, "Book was already returned.");
+        assertEquals(result, "Item already returned.");
     }
 
     @Test
@@ -55,8 +56,8 @@ public class ReturnItemTest {
         assertEquals(returnItem.getId(), 2);
     }
 
-    private List<Book> buildBooks() {
-        List<Book> books = new ArrayList<>();
+    private List<IItem> buildBooks() {
+        List<IItem> books = new ArrayList<>();
         books.add(new Book(1, "Book1", "Author1", 2000));
         books.add(new Book(2, "Book2", "Author2", 2000));
 

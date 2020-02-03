@@ -45,4 +45,14 @@ public class BookTest {
 
         assertEquals(book.getStatus(), "booked");
     }
+
+    @Test
+    public void stringifyData() {
+        Book book = new Book(1, "Book title", "Author 1", 1999);
+
+        assertEquals(
+                book.stringifyData(),
+                "Id: 1 | Title: Book title | Author: Author 1 | Publication Year: 1999 | Status: available\n"
+        );
+    }
 }

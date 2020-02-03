@@ -1,57 +1,57 @@
 package com.twu.biblioteca.services;
 
-import com.twu.biblioteca.models.Book;
+import com.twu.biblioteca.interfaces.IItem;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Library {
 
-    private List<Book> books;
+    private List<IItem> items;
 
-    public Library(List<Book> books) {
-        this.books = books;
+    public Library(List<IItem> items) {
+        this.items = items;
     }
 
-    public List<Book> listBooks() {
-        return this.books;
+    public List<IItem> listItems() {
+        return this.items;
     }
 
-    public String checkoutBook(int bookId) {
-        Book book = findBook(bookId);
+    public String checkoutItem(int itemId) {
+        IItem item = findItem(itemId);
 
-        if (alreadyBooked(book)) {
-            return "Book already booked.";
+        if (alreadyBooked(item)) {
+            return "Item already checked out.";
         }
 
-        book.setStatus("booked");
-        return "Successfully booked book.";
+        item.setStatus("booked");
+        return "Successfully checked out item.";
     }
 
-    public String returnBook(int bookId) {
-        Book book = findBook(bookId);
+    public String returnItem(int itemId) {
+        IItem item = findItem(itemId);
 
-        if (alreadyReturned(book)) {
-            return "Book was already returned.";
+        if (alreadyReturned(item)) {
+            return "Item already returned.";
         }
 
-        book.setStatus("available");
-        return "Successfully returned book.";
+        item.setStatus("available");
+        return "Successfully returned item.";
     }
 
-    private Book findBook(int bookId) {
-        return this.books
+    private IItem findItem(int itemId) {
+        return this.items
                .stream()
-               .filter(book -> book.getId() == bookId)
+               .filter(book -> book.getId() == itemId)
                .collect(Collectors.toList())
                .get(0);
     }
 
-    private boolean alreadyBooked(Book book) {
-        return book.getStatus() == "booked";
+    private boolean alreadyBooked(IItem item) {
+        return item.getStatus() == "booked";
     }
 
-    private boolean alreadyReturned(Book book) {
-        return book.getStatus() == "available";
+    private boolean alreadyReturned(IItem item) {
+        return item.getStatus() == "available";
     }
 }
