@@ -35,7 +35,6 @@ public class ReturnItemTest {
                 "Enter item ID to return: "
         );
         assertEquals(result, "Book was already returned.");
-
     }
 
     @Test

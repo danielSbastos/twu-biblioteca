@@ -44,9 +44,7 @@ public class Item implements IOption {
     }
 
     private void executeSubMenu(Menu menu) throws IOException {
-        List<IOption> menuOptions = menu.getOptions();
-
-        for (IOption option : menuOptions) {
+        for (IOption option : menu.getOptions()) {
             this.outputWriterWrapper.writeStringln(option.getId() + ". " + option.getTitle());
         }
 
