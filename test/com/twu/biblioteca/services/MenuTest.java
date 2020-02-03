@@ -1,10 +1,10 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.services;
 
 import com.twu.biblioteca.interfaces.IOption;
 import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
 import com.twu.biblioteca.models.Book;
-import com.twu.biblioteca.models.options.BooksOption;
+import com.twu.biblioteca.services.menu_options.Item;
 
 import org.junit.Test;
 import java.util.ArrayList;
@@ -22,7 +22,9 @@ public class MenuTest {
     {
         List<Book> books = new ArrayList<>();
         Library library = new Library(books);
-        IOption bookListOption = new BooksOption(library, new InputReaderWrapper(), new OutputWriterWrapper());
+        Menu subMenu = new Menu(new ArrayList<>());
+
+        IOption bookListOption = new Item(library, new InputReaderWrapper(), new OutputWriterWrapper(), subMenu);
 
         List<IOption> options = new ArrayList<>();
         options.add(bookListOption);
@@ -38,7 +40,9 @@ public class MenuTest {
     {
         List<Book> books = new ArrayList<>();
         Library library = new Library(books);
-        IOption option = new BooksOption(library, new InputReaderWrapper(), new OutputWriterWrapper());
+        Menu subMenu = new Menu(new ArrayList<>());
+
+        IOption option = new Item(library, new InputReaderWrapper(), new OutputWriterWrapper(), subMenu);
 
         List<IOption> options = new ArrayList<>();
         options.add(option);
@@ -56,7 +60,9 @@ public class MenuTest {
     {
         List<Book> books = new ArrayList<>();
         Library library = new Library(books);
-        IOption option = new BooksOption(library, new InputReaderWrapper(), new OutputWriterWrapper());
+        Menu subMenu = new Menu(new ArrayList<>());
+
+        IOption option = new Item(library, new InputReaderWrapper(), new OutputWriterWrapper(), subMenu);
 
         List<IOption> options = new ArrayList<>();
         options.add(option);
@@ -70,7 +76,7 @@ public class MenuTest {
     public void executeChosenOptionReturnsChosen()
     {
         List<Book> books = new ArrayList<>();
-        IOption mockedBookListOption = Mockito.mock(BooksOption.class);
+        IOption mockedBookListOption = Mockito.mock(Item.class);
         when(mockedBookListOption.getId()).thenCallRealMethod();
 
         List<IOption> options = new ArrayList<>();

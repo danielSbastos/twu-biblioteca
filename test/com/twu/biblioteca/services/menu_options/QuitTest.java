@@ -1,4 +1,4 @@
-package com.twu.biblioteca.models.options;
+package com.twu.biblioteca.services.menu_options;
 
 import com.twu.biblioteca.lib.SystemWrapper;
 import org.junit.Test;

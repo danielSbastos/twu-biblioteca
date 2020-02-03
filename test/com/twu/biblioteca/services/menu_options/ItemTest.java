@@ -1,10 +1,12 @@
-package com.twu.biblioteca.models.options;
+package com.twu.biblioteca.services.menu_options;
 
-import com.twu.biblioteca.Library;
+import com.twu.biblioteca.interfaces.IOption;
+import com.twu.biblioteca.services.Library;
 import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
 import com.twu.biblioteca.models.Book;
 
+import com.twu.biblioteca.services.Menu;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -15,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 
-public class BooksOptionTest {
+public class ItemTest {
     @Test
     public void actionBooksBook() throws IOException {
         List<Book> books = buildBooks();
@@ -23,10 +25,12 @@ public class BooksOptionTest {
         Book secondBook = books.get(1);
 
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
+        OutputWriterWrapper outputWriterWrapper = new OutputWriterWrapper();
         when(inputReaderWrapperMock.readInt()).thenReturn(firstBook.getId()).thenThrow(new IOException());
         Library library = new Library(books);
+        Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapper);
 
-        BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, new OutputWriterWrapper());
+        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
         booksOption.action();
 
         assertEquals(firstBook.getStatus(), "booked");
@@ -45,8 +49,9 @@ public class BooksOptionTest {
         when(inputReaderWrapperMock.readInt()).thenReturn(firstBook.getId()).thenThrow(new IOException());
         OutputWriterWrapper outputWriterWrapperMock = Mockito.mock(OutputWriterWrapper.class);
         Library library = new Library(books);
+        Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapperMock);
 
-        BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapperMock);
+        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapperMock, subMenu);
         booksOption.action();
 
         verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
@@ -65,10 +70,12 @@ public class BooksOptionTest {
         Book secondBook = books.get(1);
 
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
+        OutputWriterWrapper outputWriterWrapper = new OutputWriterWrapper();
         when(inputReaderWrapperMock.readInt()).thenThrow(new IOException()).thenThrow(new IOException());
         Library library = new Library(books);
+        Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapper);
 
-        BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, new OutputWriterWrapper());
+        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
         booksOption.action();
 
         assertEquals(firstBook.getStatus(), "available");
@@ -87,8 +94,9 @@ public class BooksOptionTest {
         when(inputReaderWrapperMock.readInt()).thenThrow(new IOException()).thenThrow(new IOException());
         OutputWriterWrapper outputWriterWrapperMock = Mockito.mock(OutputWriterWrapper.class);
         Library library = new Library(books);
+        Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapperMock);
 
-        BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapperMock);
+        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapperMock, subMenu);
         booksOption.action();
 
         verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
@@ -108,10 +116,12 @@ public class BooksOptionTest {
         Book secondBook = books.get(1);
 
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
+        OutputWriterWrapper outputWriterWrapper = new OutputWriterWrapper();
         when(inputReaderWrapperMock.readInt()).thenReturn(firstBook.getId()).thenThrow(new IOException());
         Library library = new Library(books);
+        Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapper);
 
-        BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, new OutputWriterWrapper());
+        Item booksOption = new Item(library, inputReaderWrapperMock, new OutputWriterWrapper(), subMenu);
         booksOption.action();
 
         assertEquals(firstBook.getStatus(), "booked");
@@ -131,8 +141,9 @@ public class BooksOptionTest {
         when(inputReaderWrapperMock.readInt()).thenReturn(firstBook.getId()).thenThrow(new IOException());
         OutputWriterWrapper outputWriterWrapperMock = Mockito.mock(OutputWriterWrapper.class);
         Library library = new Library(books);
+        Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapperMock);
 
-        BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapperMock);
+        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapperMock, subMenu);
         booksOption.action();
 
         verify(outputWriterWrapperMock, times(1)).writeStringln(expectedBooksInformation);
@@ -153,11 +164,11 @@ public class BooksOptionTest {
 
         Library library = new Library(books);
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
+        OutputWriterWrapper outputWriterWrapper = new OutputWriterWrapper();
         when(inputReaderWrapperMock.readInt()).thenThrow(new IOException()).thenReturn(firstBook.getId());
+        Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapper);
 
-        OutputWriterWrapper outputWriterWrapper = Mockito.mock(OutputWriterWrapper.class);
-
-        BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapper);
+        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
         booksOption.action();
 
         assertEquals(firstBook.getStatus(), "available");
@@ -173,9 +184,11 @@ public class BooksOptionTest {
         Library library = new Library(books);
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
         OutputWriterWrapper outputWriterWrapper = Mockito.mock(OutputWriterWrapper.class);
+        Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapper);
+
         when(inputReaderWrapperMock.readInt()).thenThrow(new IOException()).thenReturn(firstBook.getId());
 
-        BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapper);
+        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
         booksOption.action();
 
         verify(outputWriterWrapper, times(1)).writeString(
@@ -196,9 +209,11 @@ public class BooksOptionTest {
         Library library = new Library(books);
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
         OutputWriterWrapper outputWriterWrapper = Mockito.mock(OutputWriterWrapper.class);
+        Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapper);
+
         when(inputReaderWrapperMock.readInt()).thenThrow(new IOException()).thenReturn(firstBook.getId());
 
-        BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapper);
+        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
         booksOption.action();
 
         assertEquals(firstBook.getStatus(), "available");
@@ -214,9 +229,11 @@ public class BooksOptionTest {
         Library library = new Library(books);
         InputReaderWrapper inputReaderWrapperMock = Mockito.mock(InputReaderWrapper.class);
         OutputWriterWrapper outputWriterWrapper = Mockito.mock(OutputWriterWrapper.class);
+        Menu subMenu = buildSubMenu(library, inputReaderWrapperMock, outputWriterWrapper);
+
         when(inputReaderWrapperMock.readInt()).thenThrow(new IOException()).thenReturn(firstBook.getId());
 
-        BooksOption booksOption = new BooksOption(library, inputReaderWrapperMock, outputWriterWrapper);
+        Item booksOption = new Item(library, inputReaderWrapperMock, outputWriterWrapper, subMenu);
         booksOption.action();
 
         verify(outputWriterWrapper, times(1)).writeString(
@@ -253,5 +270,15 @@ public class BooksOptionTest {
         books.add(new Book(2, "Book2", "Author2", 2000));
 
         return books;
+    }
+
+    private Menu buildSubMenu(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
+        List<IOption> options = new ArrayList<>();
+        IOption checkoutItemOption = new CheckoutItem(library, inputReaderWrapper, outputWriterWrapper);
+        IOption returnItemOption = new ReturnItem(library, inputReaderWrapper, outputWriterWrapper);
+        options.add(checkoutItemOption);
+        options.add(returnItemOption);
+
+        return new Menu(options);
     }
 }
