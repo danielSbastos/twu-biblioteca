@@ -28,18 +28,33 @@ public class ReturnItemTest {
         when(inputReaderWrapperMock.readInt()).thenReturn(firstBook.getId()).thenThrow(new IOException());
 
         ReturnItem returnItem = new ReturnItem(library, inputReaderWrapperMock, outputWriterWrapperMock);
-        returnItem.action();
+        String result = returnItem.action();
 
         assertEquals(firstBook.getStatus(), "available");
         verify(outputWriterWrapperMock, times(1)).writeString(
-                "Do you wish to return any book? If yes, enter its id or press enter to continue: "
+                "Enter item ID to return: "
         );
-        verify(outputWriterWrapperMock, times(1)).writeStringln(
-                "Book was already returned."
-        );
+        assertEquals(result, "Book was already returned.");
 
     }
 
+    @Test
+    public void getTitle() {
+        Library library = new Library(new ArrayList<>());
+
+        ReturnItem returnItem = new ReturnItem(library, new InputReaderWrapper(), new OutputWriterWrapper());
+
+        assertEquals(returnItem.getTitle(), "Return item");
+    }
+
+    @Test
+    public void getId() {
+        Library library = new Library(new ArrayList<>());
+
+        ReturnItem returnItem = new ReturnItem(library, new InputReaderWrapper(), new OutputWriterWrapper());
+
+        assertEquals(returnItem.getId(), 2);
+    }
 
     private List<Book> buildBooks() {
         List<Book> books = new ArrayList<>();

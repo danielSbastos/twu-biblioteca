@@ -8,11 +8,9 @@ import com.twu.biblioteca.models.Book;
 import com.twu.biblioteca.services.Menu;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Item implements IOption {
-
     private Library library;
     private InputReaderWrapper inputReaderWrapper;
     private OutputWriterWrapper outputWriterWrapper;
@@ -36,14 +34,11 @@ public class Item implements IOption {
                 book.getStatus()
             );
         }
-
         this.outputWriterWrapper.writeStringln(information);
 
         try {
             executeSubMenu(this.subMenu);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) {}
 
         return "";
     }
@@ -52,7 +47,7 @@ public class Item implements IOption {
         List<IOption> menuOptions = menu.getOptions();
 
         for (IOption option : menuOptions) {
-            new OutputWriterWrapper().writeStringln(option.getId() + ". " + option.getTitle());
+            this.outputWriterWrapper.writeStringln(option.getId() + ". " + option.getTitle());
         }
 
         int chosenOptionId = this.inputReaderWrapper.readInt();

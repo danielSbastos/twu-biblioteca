@@ -31,9 +31,27 @@ public class CheckoutItemTest {
 
         assertEquals(firstBook.getStatus(), "booked");
         verify(outputWriterWrapperMock, times(1)).writeString(
-                "Enter ID: "
+                "Enter item ID to checkout: "
         );
-        assertEquals(result, "Success booked book.");
+        assertEquals(result, "Successfully booked book.");
+    }
+
+    @Test
+    public void getTitle() {
+        Library library = new Library(new ArrayList<>());
+
+        CheckoutItem checkoutItem = new CheckoutItem(library, new InputReaderWrapper(), new OutputWriterWrapper());
+
+        assertEquals(checkoutItem.getTitle(), "Checkout item");
+    }
+
+    @Test
+    public void getId() {
+        Library library = new Library(new ArrayList<>());
+
+        CheckoutItem checkoutItem = new CheckoutItem(library, new InputReaderWrapper(), new OutputWriterWrapper());
+
+        assertEquals(checkoutItem.getId(), 1);
     }
 
     private List<Book> buildBooks() {

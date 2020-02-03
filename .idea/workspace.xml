@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f6e60e6d-d818-4863-b077-77538381485e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/MenuFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/services/menu_options/CheckoutItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/services/menu_options/Item.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/services/menu_options/ReturnItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/services/menu_options/CheckoutItemTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/services/menu_options/ReturnItemTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/Library.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/services/Library.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/services/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/models/options/BooksOption.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/models/options/Quit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/services/menu_options/Quit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/LibraryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/services/LibraryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/MenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/services/MenuTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/models/options/BooksOptionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/services/menu_options/ItemTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/models/options/QuitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/services/menu_options/QuitTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="f6e60e6d-d818-4863-b077-77538381485e" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,20 +41,7 @@
       <recent name="com.twu.biblioteca.services" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.Main" />
-      <module name="biblioteca" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.twu.biblioteca.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.All in biblioteca">
     <configuration name="All in biblioteca" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="biblioteca" />
       <option name="PACKAGE_NAME" value="" />
@@ -80,7 +50,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CheckoutItemTest.actionCheckoutsBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CheckoutItemTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="biblioteca" />
       <extension name="coverage">
         <pattern>
@@ -90,8 +60,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.twu.biblioteca.services.menu_options" />
       <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.services.menu_options.CheckoutItemTest" />
-      <option name="METHOD_NAME" value="actionCheckoutsBook" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -111,7 +80,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReturnItemTest.actionReturnsBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ItemTest.returnBookChangesBookStatus" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="biblioteca" />
       <extension name="coverage">
         <pattern>
@@ -120,8 +89,24 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.twu.biblioteca.services.menu_options" />
-      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.services.menu_options.ReturnItemTest" />
-      <option name="METHOD_NAME" value="actionReturnsBook" />
+      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.services.menu_options.ItemTest" />
+      <option name="METHOD_NAME" value="returnBookChangesBookStatus" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ItemTest.returnBookShowsSuccessMessage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="biblioteca" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.twu.biblioteca.services.menu_options.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.twu.biblioteca.services.menu_options" />
+      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.services.menu_options.ItemTest" />
+      <option name="METHOD_NAME" value="returnBookShowsSuccessMessage" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -129,11 +114,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.ItemTest" />
-        <item itemvalue="JUnit.CheckoutItemTest.actionCheckoutsBook" />
         <item itemvalue="JUnit.All in biblioteca" />
-        <item itemvalue="JUnit.ReturnItemTest.actionReturnsBook" />
+        <item itemvalue="JUnit.CheckoutItemTest" />
+        <item itemvalue="JUnit.ItemTest" />
+        <item itemvalue="JUnit.ItemTest.returnBookShowsSuccessMessage" />
+        <item itemvalue="JUnit.ItemTest.returnBookChangesBookStatus" />
       </list>
     </recent_temporary>
   </component>
@@ -192,26 +177,26 @@
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state x="372" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1792.1097@0.23.1792.1097" timestamp="1580741709050" />
-    <state width="1750" height="303" key="GridCell.Tab.0.bottom" timestamp="1580752475930">
+    <state width="1750" height="303" key="GridCell.Tab.0.bottom" timestamp="1580754179576">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state width="1630" height="326" key="GridCell.Tab.0.bottom/0.23.1680.947@0.23.1680.947" timestamp="1580246512370" />
-    <state width="1750" height="303" key="GridCell.Tab.0.bottom/0.23.1792.1097@0.23.1792.1097" timestamp="1580752475930" />
-    <state width="1750" height="303" key="GridCell.Tab.0.center" timestamp="1580752475929">
+    <state width="1750" height="303" key="GridCell.Tab.0.bottom/0.23.1792.1097@0.23.1792.1097" timestamp="1580754179576" />
+    <state width="1750" height="303" key="GridCell.Tab.0.center" timestamp="1580754179575">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state width="1630" height="326" key="GridCell.Tab.0.center/0.23.1680.947@0.23.1680.947" timestamp="1580246512369" />
-    <state width="1750" height="303" key="GridCell.Tab.0.center/0.23.1792.1097@0.23.1792.1097" timestamp="1580752475929" />
-    <state width="1750" height="303" key="GridCell.Tab.0.left" timestamp="1580752475929">
+    <state width="1750" height="303" key="GridCell.Tab.0.center/0.23.1792.1097@0.23.1792.1097" timestamp="1580754179575" />
+    <state width="1750" height="303" key="GridCell.Tab.0.left" timestamp="1580754179575">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state width="1630" height="326" key="GridCell.Tab.0.left/0.23.1680.947@0.23.1680.947" timestamp="1580246512369" />
-    <state width="1750" height="303" key="GridCell.Tab.0.left/0.23.1792.1097@0.23.1792.1097" timestamp="1580752475929" />
-    <state width="1750" height="303" key="GridCell.Tab.0.right" timestamp="1580752475930">
+    <state width="1750" height="303" key="GridCell.Tab.0.left/0.23.1792.1097@0.23.1792.1097" timestamp="1580754179575" />
+    <state width="1750" height="303" key="GridCell.Tab.0.right" timestamp="1580754179576">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state width="1630" height="326" key="GridCell.Tab.0.right/0.23.1680.947@0.23.1680.947" timestamp="1580246512370" />
-    <state width="1750" height="303" key="GridCell.Tab.0.right/0.23.1792.1097@0.23.1792.1097" timestamp="1580752475930" />
+    <state width="1750" height="303" key="GridCell.Tab.0.right/0.23.1792.1097@0.23.1792.1097" timestamp="1580754179576" />
     <state x="334" y="23" key="SettingsEditor" timestamp="1580388388802">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
@@ -234,9 +219,9 @@
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state x="658" y="194" key="refactoring.ChangeSignatureDialog/0.23.1792.1097@0.23.1792.1097" timestamp="1580752029079" />
-    <state x="561" y="268" width="670" height="676" key="search.everywhere.popup" timestamp="1580752034017">
+    <state x="561" y="268" width="670" height="676" key="search.everywhere.popup" timestamp="1580754095484">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
-    <state x="561" y="268" width="670" height="676" key="search.everywhere.popup/0.23.1792.1097@0.23.1792.1097" timestamp="1580752034017" />
+    <state x="561" y="268" width="670" height="676" key="search.everywhere.popup/0.23.1792.1097@0.23.1792.1097" timestamp="1580754095484" />
   </component>
 </project>
