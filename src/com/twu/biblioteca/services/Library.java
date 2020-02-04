@@ -8,9 +8,17 @@ import java.util.stream.Collectors;
 public class Library {
 
     private List<IItem> items;
+    private Finder finder;
 
+    @Deprecated
     public Library(List<IItem> items) {
         this.items = items;
+        this.finder = new Finder(items);
+    }
+
+    public Library(List<IItem> items, Finder finder) {
+        this.items = items;
+        this.finder = finder;
     }
 
     public List<IItem> listItems() {
@@ -40,11 +48,7 @@ public class Library {
     }
 
     private IItem findItem(int itemId) {
-        return this.items
-               .stream()
-               .filter(book -> book.getId() == itemId)
-               .collect(Collectors.toList())
-               .get(0);
+        return this.finder.execute(itemId);
     }
 
     private boolean alreadyBooked(IItem item) {

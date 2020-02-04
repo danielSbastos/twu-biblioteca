@@ -16,10 +16,11 @@ public class LibraryTest {
     @Test
     public void checkoutItemSuccessfullyCheckoutsTheBook() {
         List<IItem> books = new ArrayList<>();
+        Finder finder = new Finder(books);
         Book book = new Book(1, "Book1", "Author1", 1999);
         books.add(book);
 
-        Library library = new Library(books);
+        Library library = new Library(books, finder);
 
         String result = library.checkoutItem(book.getId());
 
@@ -28,13 +29,14 @@ public class LibraryTest {
     }
 
     @Test
-    public void checkoutItemFailsTocheckoutItem() {
+    public void checkoutItemFailsToCheckoutItem() {
         List<IItem> books = new ArrayList<>();
         Book book = new Book(1, "Book1", "Author1", 1999);
         book.setStatus("booked");
         books.add(book);
 
-        Library library = new Library(books);
+        Finder finder = new Finder(books);
+        Library library = new Library(books, finder);
 
         String result = library.checkoutItem(book.getId());
 
@@ -48,14 +50,14 @@ public class LibraryTest {
         book.setStatus("booked");
         books.add(book);
 
-        Library library = new Library(books);
+        Finder finder = new Finder(books);
+        Library library = new Library(books, finder);
 
         String result = library.returnItem(book.getId());
 
         assertThat(book.getStatus(), is("available"));
         assertThat(result, is("Successfully returned item."));
     }
-
 
     @Test
     public void returnsBookFailsToReturnsBook() {
@@ -64,7 +66,8 @@ public class LibraryTest {
         book.setStatus("available");
         books.add(book);
 
-        Library library = new Library(books);
+        Finder finder = new Finder(books);
+        Library library = new Library(books, finder);
 
         String result = library.returnItem(book.getId());
 
