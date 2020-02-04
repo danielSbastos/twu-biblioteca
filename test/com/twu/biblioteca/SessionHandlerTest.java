@@ -15,13 +15,12 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class LoginHandlerTest {
+public class SessionHandlerTest {
 
     List<Map> credentials;
 
     @Before
-    public void buildCredentials()
-    {
+    public void buildCredentials() {
         Map credential1 = new HashMap<String, String>();
         credential1.put("username", "matheus");
         credential1.put("password", "qwerty");
@@ -35,78 +34,47 @@ public class LoginHandlerTest {
     }
 
     @Test
-    public void validReturnsTrue() {
-        LoginHandler loginHandler = new LoginHandler(this.credentials);
-        boolean isValidCredential = loginHandler.validateCredentials("matheus", "qwerty");
-
-        assertEquals(isValidCredential, true);
-    }
-
-    @Test
-    public void validReturnsFalseForWrongPassword() {
-        LoginHandler loginHandler = new LoginHandler(this.credentials);
-        boolean isValidCredential = loginHandler.validateCredentials("matheus", "<wrong-password>");
-
-        assertEquals(isValidCredential, false);
-    }
-
-    @Test
-    public void validReturnsFalseForWrongUsername() {
-        LoginHandler loginHandler = new LoginHandler(this.credentials);
-        boolean isValidCredential = loginHandler.validateCredentials("<wrong-username>", "qwerty");
-
-        assertEquals(isValidCredential, false);
-    }
-
-    @Test
-    public void validReturnsFalseForWrongUsernameAndPassword() {
-        LoginHandler loginHandler = new LoginHandler(this.credentials);
-        boolean isValidCredential = loginHandler.validateCredentials("<wrong-username>", "<wrong-password>");
-
-        assertEquals(isValidCredential, false);
-    }
-
-    @Test
-    public void promptCredentialReturnCredentials() throws IOException {
+    public void loginReturnTrueIfCorrectCredentials() throws IOException {
         OutputWriterWrapper outputWriter = Mockito.mock(OutputWriterWrapper.class);
         InputReaderWrapper inputReader = Mockito.mock(InputReaderWrapper.class);
 
         when(inputReader.readString()).thenReturn("matheus").thenReturn("qwerty");
 
-        LoginHandler loginHandler = new LoginHandler(this.credentials, inputReader, outputWriter);
-        Map<String, String> credential = loginHandler.promptCredential();
+        SessionHandler sessionHandler = new SessionHandler(this.credentials, inputReader, outputWriter);
+        boolean successfulLogin = sessionHandler.login();
 
         verify(outputWriter, times(1)).writeString("Please input your username: ");
         verify(outputWriter, times(1)).writeString("Please input your password: ");
-        assertEquals(credential.get("username"), "matheus");
-        assertEquals(credential.get("password"), "qwerty");
+        assertEquals(successfulLogin, true);
     }
 
-    @Test(expected = IOException.class)
-    public void promptCredentialRaisesErrorIfNoUsername() throws IOException {
+    @Test
+    public void loginReturnsFalseIfNoUsername() throws IOException {
         OutputWriterWrapper outputWriter = Mockito.mock(OutputWriterWrapper.class);
         InputReaderWrapper inputReader = Mockito.mock(InputReaderWrapper.class);
 
         when(inputReader.readString()).thenThrow(new IOException());
 
-        LoginHandler loginHandler = new LoginHandler(this.credentials, inputReader, outputWriter);
-        loginHandler.promptCredential();
+        SessionHandler sessionHandler = new SessionHandler(this.credentials, inputReader, outputWriter);
+        boolean successfulLogin = sessionHandler.login();
 
         verify(outputWriter, times(1)).writeString("Please input your username: ");
         verify(outputWriter, times(0)).writeString("Please input your password: ");
+        assertEquals(successfulLogin, false);
     }
 
-    @Test(expected = IOException.class)
-    public void promptCredentialRaisesErrorIfNoPassword() throws IOException {
+    @Test
+    public void loginReturnsFalseIfNoPassword() throws IOException {
         OutputWriterWrapper outputWriter = Mockito.mock(OutputWriterWrapper.class);
         InputReaderWrapper inputReader = Mockito.mock(InputReaderWrapper.class);
 
         when(inputReader.readString()).thenReturn("matheus").thenThrow(new IOException());
 
-        LoginHandler loginHandler = new LoginHandler(this.credentials, inputReader, outputWriter);
-        loginHandler.promptCredential();
+        SessionHandler sessionHandler = new SessionHandler(this.credentials, inputReader, outputWriter);
+        boolean successfulLogin = sessionHandler.login();
 
         verify(outputWriter, times(1)).writeString("Please input your username: ");
         verify(outputWriter, times(1)).writeString("Please input your password: ");
+        assertEquals(successfulLogin, false);
     }
 }

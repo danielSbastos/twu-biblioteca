@@ -26,7 +26,7 @@ public class Library {
     }
 
     public String checkoutItem(int itemId) {
-        IItem item = findItem(itemId);
+        IItem item = this.finder.execute(itemId);
 
         if (alreadyBooked(item)) {
             return "Item already checked out.";
@@ -37,7 +37,7 @@ public class Library {
     }
 
     public String returnItem(int itemId) {
-        IItem item = findItem(itemId);
+        IItem item = this.finder.execute(itemId);
 
         if (alreadyReturned(item)) {
             return "Item already returned.";
@@ -47,10 +47,7 @@ public class Library {
         return "Successfully returned item.";
     }
 
-    private IItem findItem(int itemId) {
-        return this.finder.execute(itemId);
-    }
-
+    // TODO: Ask book instance to check if its booked or not
     private boolean alreadyBooked(IItem item) {
         return item.getStatus() == "booked";
     }

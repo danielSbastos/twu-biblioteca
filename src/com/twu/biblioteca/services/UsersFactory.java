@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class UsersFactory {
 
-
     public static List<Map> buildUsers()
     {
         List<Map> users = new ArrayList<>();

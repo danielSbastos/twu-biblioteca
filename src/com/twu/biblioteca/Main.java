@@ -8,6 +8,7 @@ import com.twu.biblioteca.services.MenuFactory;
 import com.twu.biblioteca.services.UsersFactory;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 
@@ -18,8 +19,7 @@ public class Main {
     public static void main(String[] args) {
         if (!login()) return;
 
-        Welcome welcome = new Welcome();
-        outputWriterWrapper.writeStringln(welcome.showMessage());
+        outputWriterWrapper.writeStringln(new Welcome().showMessage());
 
         Menu menu = new MenuFactory().execute();
 
@@ -33,25 +33,9 @@ public class Main {
     }
 
     private static boolean login() {
-        LoginHandler loginHandler = new LoginHandler(
-                UsersFactory.buildUsers(),
-                inputReaderWrapper,
-                outputWriterWrapper
-        );
-        boolean isCredentialValid = false;
-
-        try {
-            Map<String, String> credential = loginHandler.promptCredential();
-            String username = credential.get("username");
-            String password =  credential.get("password");
-            isCredentialValid = loginHandler.validateCredentials(username, password);
-        } catch (IOException e) {
-            System.err.println("An error has occurred");
-        }
-
-        if (!isCredentialValid) System.err.println("Invalid username or password");
-
-        return isCredentialValid;
+        List<Map> credentials = UsersFactory.buildUsers();
+        SessionHandler sessionHandler = new SessionHandler(credentials, inputReaderWrapper, outputWriterWrapper);
+        return sessionHandler.login();
     }
 
     private static void executeMainMenu(Menu menu) throws IOException {
