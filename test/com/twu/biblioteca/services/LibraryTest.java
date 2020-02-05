@@ -3,15 +3,27 @@ package com.twu.biblioteca.services;
 import com.twu.biblioteca.interfaces.IItem;
 import com.twu.biblioteca.models.Book;
 
+import com.twu.biblioteca.models.CurrentUser;
+import com.twu.biblioteca.models.User;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class LibraryTest {
+
+    @Before
+    public void setCurrentUser() {
+        User.deleteAll();
+
+        User user = new User("xxx-xxxx", "password", "customer");
+        CurrentUser.set(user);
+    }
 
     @Test
     public void checkoutItemSuccessfullyCheckoutsTheBook() {
@@ -41,6 +53,20 @@ public class LibraryTest {
         String result = library.checkoutItem(book.getId());
 
         assertThat(result, is("Item already checked out."));
+    }
+
+    @Test
+    public void checkoutItemSetsBookedBy() {
+        List<IItem> books = new ArrayList<>();
+        Finder finder = new Finder(books);
+        Book book = new Book(1, "Book1", "Author1", 1999);
+        books.add(book);
+
+        Library library = new Library(books, finder);
+
+        library.checkoutItem(book.getId());
+
+        assertEquals(book.getBookedBy(), CurrentUser.get());
     }
 
     @Test

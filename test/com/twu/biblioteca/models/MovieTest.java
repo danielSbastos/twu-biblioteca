@@ -39,4 +39,14 @@ public class MovieTest {
 
         assertEquals(movie.stringifyData(), expectedStringifyData);
     }
+
+    @Test
+    public void bookedBy() {
+        User user = new User("aaaa", "aaaa", "customer");
+        Movie movie = new Movie(1, "Movie", 1999, "Director", 1);
+
+        movie.setBookedBy(user);
+
+        assertEquals(movie.getBookedBy(), user);
+    }
 }

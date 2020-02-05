@@ -55,4 +55,14 @@ public class BookTest {
                 "Id: 1 | Title: Book title | Author: Author 1 | Publication Year: 1999 | Status: available\n"
         );
     }
+
+    @Test
+    public void bookedBy() {
+        User user = new User("aaaa", "aaaa", "customer");
+        Book book = new Book(1, "Book title", "Author 1", 1999);
+
+        book.setBookedBy(user);
+
+        assertEquals(book.getBookedBy(), user);
+    }
 }

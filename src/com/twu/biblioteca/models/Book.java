@@ -8,6 +8,7 @@ public class Book implements IItem {
     private String author;
     private int publicationYear;
     private String status;
+    private User bookedBy;
 
     public Book(int id, String title, String author, int publicationYear) {
         this.id = id;
@@ -52,5 +53,13 @@ public class Book implements IItem {
                 this.publicationYear,
                 this.status
         );
+    }
+
+    public void setBookedBy(User user) {
+        this.bookedBy = user;
+    }
+
+    public User getBookedBy() {
+        return this.bookedBy;
     }
 }

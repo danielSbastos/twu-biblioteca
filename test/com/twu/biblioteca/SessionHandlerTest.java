@@ -2,6 +2,8 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
+import com.twu.biblioteca.models.CurrentUser;
+import com.twu.biblioteca.models.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -17,20 +19,17 @@ import static org.mockito.Mockito.*;
 
 public class SessionHandlerTest {
 
-    List<Map> credentials;
+    List<User> users = new ArrayList<>();
 
     @Before
     public void buildCredentials() {
-        Map credential1 = new HashMap<String, String>();
-        credential1.put("username", "matheus");
-        credential1.put("password", "qwerty");
-        Map credential2 = new HashMap<String, String>();
-        credential2.put("username", "daniel");
-        credential2.put("password", "zxcvbn");
+        User.deleteAll();
 
-        this.credentials = new ArrayList<>();
-        this.credentials.add(credential1);
-        this.credentials.add(credential2);
+        User userOne = new User("xxx-xxxx", "password-one", "customer");
+        User userTwo = new User("yyy-yyyy", "password-two", "librarian");
+
+        users.add(userOne);
+        users.add(userTwo);
     }
 
     @Test
@@ -38,9 +37,9 @@ public class SessionHandlerTest {
         OutputWriterWrapper outputWriter = Mockito.mock(OutputWriterWrapper.class);
         InputReaderWrapper inputReader = Mockito.mock(InputReaderWrapper.class);
 
-        when(inputReader.readString()).thenReturn("matheus").thenReturn("qwerty");
+        when(inputReader.readString()).thenReturn("xxx-xxxx").thenReturn("password-one");
 
-        SessionHandler sessionHandler = new SessionHandler(this.credentials, inputReader, outputWriter);
+        SessionHandler sessionHandler = new SessionHandler(this.users, inputReader, outputWriter);
         boolean successfulLogin = sessionHandler.login();
 
         verify(outputWriter, times(1)).writeString("Please input your username: ");
@@ -55,7 +54,7 @@ public class SessionHandlerTest {
 
         when(inputReader.readString()).thenThrow(new IOException());
 
-        SessionHandler sessionHandler = new SessionHandler(this.credentials, inputReader, outputWriter);
+        SessionHandler sessionHandler = new SessionHandler(this.users, inputReader, outputWriter);
         boolean successfulLogin = sessionHandler.login();
 
         verify(outputWriter, times(1)).writeString("Please input your username: ");
@@ -68,13 +67,28 @@ public class SessionHandlerTest {
         OutputWriterWrapper outputWriter = Mockito.mock(OutputWriterWrapper.class);
         InputReaderWrapper inputReader = Mockito.mock(InputReaderWrapper.class);
 
-        when(inputReader.readString()).thenReturn("matheus").thenThrow(new IOException());
+        when(inputReader.readString()).thenReturn("xxx-xxxx").thenThrow(new IOException());
 
-        SessionHandler sessionHandler = new SessionHandler(this.credentials, inputReader, outputWriter);
+        SessionHandler sessionHandler = new SessionHandler(this.users, inputReader, outputWriter);
         boolean successfulLogin = sessionHandler.login();
 
         verify(outputWriter, times(1)).writeString("Please input your username: ");
         verify(outputWriter, times(1)).writeString("Please input your password: ");
         assertEquals(successfulLogin, false);
+    }
+
+    @Test
+    public void loginSetsCurrentUser() throws IOException {
+        User expectedCurrentUser = this.users.get(0);
+
+        OutputWriterWrapper outputWriter = Mockito.mock(OutputWriterWrapper.class);
+        InputReaderWrapper inputReader = Mockito.mock(InputReaderWrapper.class);
+
+        when(inputReader.readString()).thenReturn(expectedCurrentUser.libraryId).thenReturn(expectedCurrentUser.password);
+
+        SessionHandler sessionHandler = new SessionHandler(this.users, inputReader, outputWriter);
+        sessionHandler.login();
+
+        assertEquals(CurrentUser.get(), expectedCurrentUser);
     }
 }

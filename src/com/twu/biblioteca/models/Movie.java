@@ -9,6 +9,7 @@ public class Movie implements IItem {
     private String director;
     private int rating;
     private String status;
+    private User bookedBy;
 
     public Movie(int id, String name, int year, String director, int rating) {
         this.id = id;
@@ -40,5 +41,13 @@ public class Movie implements IItem {
                 this.rating,
                 this.status
         );
+    }
+
+    public void setBookedBy(User user) {
+        this.bookedBy = user;
+    }
+
+    public User getBookedBy() {
+        return this.bookedBy;
     }
 }

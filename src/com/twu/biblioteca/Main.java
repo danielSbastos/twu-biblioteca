@@ -3,13 +3,13 @@ package com.twu.biblioteca;
 import com.twu.biblioteca.interfaces.IOption;
 import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
+import com.twu.biblioteca.models.User;
 import com.twu.biblioteca.services.Menu;
 import com.twu.biblioteca.services.MenuFactory;
 import com.twu.biblioteca.services.UsersFactory;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 
 public class Main {
@@ -33,8 +33,8 @@ public class Main {
     }
 
     private static boolean login() {
-        List<Map> credentials = UsersFactory.buildUsers();
-        SessionHandler sessionHandler = new SessionHandler(credentials, inputReaderWrapper, outputWriterWrapper);
+        List<User> users = UsersFactory.execute();
+        SessionHandler sessionHandler = new SessionHandler(users, inputReaderWrapper, outputWriterWrapper);
         return sessionHandler.login();
     }
 

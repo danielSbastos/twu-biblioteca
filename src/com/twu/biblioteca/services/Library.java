@@ -1,7 +1,9 @@
 package com.twu.biblioteca.services;
 
 import com.twu.biblioteca.interfaces.IItem;
+import com.twu.biblioteca.models.CurrentUser;
 
+import java.util.Currency;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +34,7 @@ public class Library {
             return "Item already checked out.";
         }
 
+        item.setBookedBy(CurrentUser.get());
         item.setStatus("booked");
         return "Successfully checked out item.";
     }
