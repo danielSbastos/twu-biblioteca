@@ -4,7 +4,6 @@ import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
 import com.twu.biblioteca.models.CurrentUser;
 import com.twu.biblioteca.models.User;
-import com.twu.biblioteca.services.UsersFactory;
 
 import java.io.IOException;
 import java.util.HashMap;

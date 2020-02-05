@@ -5,8 +5,8 @@ import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
 import com.twu.biblioteca.models.User;
 import com.twu.biblioteca.services.Menu;
-import com.twu.biblioteca.services.MenuFactory;
-import com.twu.biblioteca.services.UsersFactory;
+import com.twu.biblioteca.factories.MenuFactory;
+import com.twu.biblioteca.factories.UsersFactory;
 
 import java.io.IOException;
 import java.util.List;

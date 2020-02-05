@@ -1,4 +1,4 @@
-package com.twu.biblioteca.services;
+package com.twu.biblioteca.factories;
 
 import com.twu.biblioteca.models.User;
 

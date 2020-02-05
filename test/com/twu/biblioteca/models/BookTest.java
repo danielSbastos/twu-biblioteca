@@ -1,10 +1,17 @@
 package com.twu.biblioteca.models;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class BookTest {
+
+    @Before
+    public void setCurrentUser() {
+        User user = new User("xxx-xxxx", "qwerty", "librarian");
+        CurrentUser.set(user);
+    }
 
     @Test
     public void getTitleReturnsTitle() {
@@ -53,6 +60,19 @@ public class BookTest {
         assertEquals(
                 book.stringifyData(),
                 "Id: 1 | Title: Book title | Author: Author 1 | Publication Year: 1999 | Status: available\n"
+        );
+    }
+
+    @Test
+    public void stringifyDataAlreadyBookedAsLibrarian() {
+        User bookedByUser = new User("aaa-aaaa", "password", "customer");
+        Book book = new Book(1, "Book title", "Author 1", 1999);
+        book.setStatus("booked");
+        book.setBookedBy(bookedByUser);
+
+        assertEquals(
+                book.stringifyData(),
+                "Id: 1 | Title: Book title | Author: Author 1 | Publication Year: 1999 | Status: booked | Booked by: aaa-aaaa\n"
         );
     }
 

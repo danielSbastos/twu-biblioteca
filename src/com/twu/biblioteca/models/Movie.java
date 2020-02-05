@@ -33,7 +33,7 @@ public class Movie implements IItem {
     }
 
     public String stringifyData() {
-        return String.format("Id: %s | Name: %s | Year: %s | Director: %s | Rating: %s | Status: %s\n",
+        String data = String.format("Id: %s | Name: %s | Year: %s | Director: %s | Rating: %s | Status: %s",
                 this.id,
                 this.name,
                 this.year,
@@ -41,6 +41,14 @@ public class Movie implements IItem {
                 this.rating,
                 this.status
         );
+
+        // FIXME: This code is very bad
+        if (CurrentUser.get().role == "librarian" && this.status == "booked")
+            data += String.format(" | Booked by: %s\n", this.bookedBy.libraryId);
+        else
+            data += "\n";
+
+        return data;
     }
 
     public void setBookedBy(User user) {

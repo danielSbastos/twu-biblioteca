@@ -8,7 +8,7 @@ public class User {
 
     public String libraryId;
     public String password;
-    private String role;
+    public String role;
 
     public static List<User> getAll() {
        return users;
