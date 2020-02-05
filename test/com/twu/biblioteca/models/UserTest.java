@@ -17,32 +17,72 @@ public class UserTest {
 
     @Test
     public void getAll() {
-        User user1 = new User("111-1111", "password", "customer");
-        User user2 = new User("222-2222", "password", "customer");
-        User user3 = new User("333-3333", "password", "librarian");
+        User user1 = new User(
+                "yyy-yyyy",
+                "qwerty",
+                "customer",
+                "daniel",
+                "daniel@tw.com",
+                "31 99999-9999"
+        );
+
+        User user2 = new User(
+                "xxx-xxxx",
+                "qwerty",
+                "librarian",
+                "matheus",
+                "matheus@tw.com",
+                "31 99999-9999"
+        );
+
 
         List<User> expectedAllUsers = new ArrayList<>();
         expectedAllUsers.add(user1);
         expectedAllUsers.add(user2);
-        expectedAllUsers.add(user3);
 
         assertEquals(User.getAll(), expectedAllUsers);
     }
 
     @Test
     public void findByLibraryIdReturnsUser() {
-        User user = new User("111-1111", "password", "customer");
-        new User("222-2222", "password", "customer");
-        new User("333-3333", "password", "librarian");
+        User user = new User(
+                "yyy-yyyy",
+                "qwerty",
+                "customer",
+                "daniel",
+                "daniel@tw.com",
+                "31 99999-9999"
+        );
+        new User(
+                "xxx-xxxx",
+                "qwerty",
+                "librarian",
+                "matheus",
+                "matheus@tw.com",
+                "31 99999-9999"
+        );
 
-        assertEquals(User.findByLibraryId("111-1111"), user);
+        assertEquals(User.findByLibraryId("yyy-yyyy"), user);
     }
 
     @Test
     public void findByLibraryIdReturnsNull() {
-        new User("111-1111", "password", "customer");
-        new User("222-2222", "password", "customer");
-        new User("333-3333", "password", "librarian");
+        User user = new User(
+                "yyy-yyyy",
+                "qwerty",
+                "customer",
+                "daniel",
+                "daniel@tw.com",
+                "31 99999-9999"
+        );
+        new User(
+                "xxx-xxxx",
+                "qwerty",
+                "librarian",
+                "matheus",
+                "matheus@tw.com",
+                "31 99999-9999"
+        );
 
         assertEquals(User.findByLibraryId("<not-existent"), null);
     }

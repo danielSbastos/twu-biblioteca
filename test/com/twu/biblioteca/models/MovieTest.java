@@ -9,7 +9,15 @@ public class MovieTest {
 
     @Before
     public void setCurrentUser() {
-        User user = new User("xxx-xxxx", "qwerty", "librarian");
+        User user = new User(
+                "xxx-xxxx",
+                "zxcvb",
+                "librarian",
+                "daniel",
+                "daniel@tw.com",
+                "31 99999-9999"
+        );
+
         CurrentUser.set(user);
     }
 
@@ -49,19 +57,35 @@ public class MovieTest {
 
     @Test
     public void stringifyDataAlreadyBookedAsLibrarian() {
-        User bookedByUser = new User("aaa-aaaa", "password", "customer");
+        User user = new User(
+                "yyy-yyyy",
+                "qwerty",
+                "customer",
+                "daniel",
+                "daniel@tw.com",
+                "31 99999-9999"
+        );
+
         Movie movie = new Movie(1, "Movie", 1999, "Director", 1);
         movie.setStatus("booked");
-        movie.setBookedBy(bookedByUser);
+        movie.setBookedBy(user);
 
         assertEquals(
                 movie.stringifyData(),
-                "Id: 1 | Name: Movie | Year: 1999 | Director: Director | Rating: 1 | Status: booked | Booked by: aaa-aaaa\n"
+                "Id: 1 | Name: Movie | Year: 1999 | Director: Director | Rating: 1 | Status: booked | Booked by: yyy-yyyy\n"
         );
     }
     @Test
     public void bookedBy() {
-        User user = new User("aaaa", "aaaa", "customer");
+        User user = new User(
+                "yyy-yyyy",
+                "qwerty",
+                "customer",
+                "daniel",
+                "daniel@tw.com",
+                "31 99999-9999"
+        );
+
         Movie movie = new Movie(1, "Movie", 1999, "Director", 1);
 
         movie.setBookedBy(user);

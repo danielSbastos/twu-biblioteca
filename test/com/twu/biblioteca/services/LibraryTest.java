@@ -21,7 +21,15 @@ public class LibraryTest {
     public void setCurrentUser() {
         User.deleteAll();
 
-        User user = new User("xxx-xxxx", "password", "customer");
+        User user = new User(
+                "yyy-yyyy",
+                "qwerty",
+                "customer",
+                "daniel",
+                "daniel@tw.com",
+                "31 99999-9999"
+        );
+
         CurrentUser.set(user);
     }
 

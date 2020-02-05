@@ -7,6 +7,7 @@ import com.twu.biblioteca.lib.OutputWriterWrapper;
 import com.twu.biblioteca.lib.SystemWrapper;
 import com.twu.biblioteca.models.Book;
 import com.twu.biblioteca.models.Movie;
+import com.twu.biblioteca.models.User;
 import com.twu.biblioteca.services.Library;
 import com.twu.biblioteca.services.Menu;
 import com.twu.biblioteca.services.menu_options.*;
@@ -32,12 +33,14 @@ public class MenuFactory {
         );
         IOption quitOption = new Quit(new SystemWrapper());
         IOption logoutOption = new Logout();
+        IOption userInformation = new UserInformation();
 
         List<IOption> options = new ArrayList<>();
         options.add(bookListOption);
         options.add(movieListOption);
         options.add(quitOption);
         options.add(logoutOption);
+        options.add(userInformation);
 
         return new Menu(options);
     }

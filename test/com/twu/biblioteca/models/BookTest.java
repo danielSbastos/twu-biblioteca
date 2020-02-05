@@ -9,7 +9,15 @@ public class BookTest {
 
     @Before
     public void setCurrentUser() {
-        User user = new User("xxx-xxxx", "qwerty", "librarian");
+        User user = new User(
+                "xxx-xxxx",
+                "qwerty",
+                "librarian",
+                "matheus",
+                "matheus@tw.com",
+                "31 99999-9999"
+        );
+
         CurrentUser.set(user);
     }
 
@@ -65,20 +73,36 @@ public class BookTest {
 
     @Test
     public void stringifyDataAlreadyBookedAsLibrarian() {
-        User bookedByUser = new User("aaa-aaaa", "password", "customer");
+        User bookedByUser = new User(
+                "xxx-xxxx",
+                "qwerty",
+                "librarian",
+                "matheus",
+                "matheus@tw.com",
+                "31 99999-9999"
+        );
+
         Book book = new Book(1, "Book title", "Author 1", 1999);
         book.setStatus("booked");
         book.setBookedBy(bookedByUser);
 
         assertEquals(
                 book.stringifyData(),
-                "Id: 1 | Title: Book title | Author: Author 1 | Publication Year: 1999 | Status: booked | Booked by: aaa-aaaa\n"
+                "Id: 1 | Title: Book title | Author: Author 1 | Publication Year: 1999 | Status: booked | Booked by: xxx-xxxx\n"
         );
     }
 
     @Test
     public void bookedBy() {
-        User user = new User("aaaa", "aaaa", "customer");
+        User user = new User(
+                "xxx-xxxx",
+                "qwerty",
+                "librarian",
+                "matheus",
+                "matheus@tw.com",
+                "31 99999-9999"
+        );
+
         Book book = new Book(1, "Book title", "Author 1", 1999);
 
         book.setBookedBy(user);

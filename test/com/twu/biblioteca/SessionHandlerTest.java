@@ -25,11 +25,26 @@ public class SessionHandlerTest {
     public void buildCredentials() {
         User.deleteAll();
 
-        User userOne = new User("xxx-xxxx", "password-one", "customer");
-        User userTwo = new User("yyy-yyyy", "password-two", "librarian");
+        User user1 = new User(
+                "yyy-yyyy",
+                "qwerty",
+                "customer",
+                "daniel",
+                "daniel@tw.com",
+                "31 99999-9999"
+        );
 
-        users.add(userOne);
-        users.add(userTwo);
+        User user2 = new User(
+                "xxx-xxxx",
+                "qwerty",
+                "librarian",
+                "matheus",
+                "matheus@tw.com",
+                "31 99999-9999"
+        );
+
+        users.add(user1);
+        users.add(user2);
     }
 
     @Test
@@ -37,7 +52,7 @@ public class SessionHandlerTest {
         OutputWriterWrapper outputWriter = Mockito.mock(OutputWriterWrapper.class);
         InputReaderWrapper inputReader = Mockito.mock(InputReaderWrapper.class);
 
-        when(inputReader.readString()).thenReturn("xxx-xxxx").thenReturn("password-one");
+        when(inputReader.readString()).thenReturn("xxx-xxxx").thenReturn("qwerty");
 
         SessionHandler sessionHandler = new SessionHandler(this.users, inputReader, outputWriter);
         boolean successfulLogin = sessionHandler.login();

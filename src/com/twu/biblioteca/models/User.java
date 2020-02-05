@@ -6,6 +6,9 @@ import java.util.List;
 public class User {
     private static List<User> users = new ArrayList<>();
 
+    public String email;
+    public String phoneNumber;
+    public String name;
     public String libraryId;
     public String password;
     public String role;
@@ -28,10 +31,13 @@ public class User {
         users = new ArrayList<>();
     }
 
-    public User(String libraryId, String password, String role) {
+    public User(String libraryId, String password, String role, String name, String email, String phoneNumber) {
         this.libraryId = libraryId;
         this.password = password;
         this.role = role;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
 
         users.add(this);
     }
