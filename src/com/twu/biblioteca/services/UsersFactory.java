@@ -12,7 +12,6 @@ public class UsersFactory {
     public static List<User> execute() {
         new User("yyy-yyyy", "qwerty", "librarian");
         new User("xxx-xxxx", "zxcvb", "customer");
-        new User("xxx-xxxx", "zxcvb", "customer");
 
         return User.getAll();
     }

@@ -2,7 +2,6 @@ package com.twu.biblioteca.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class User {
     private static List<User> users = new ArrayList<>();
@@ -16,15 +15,13 @@ public class User {
     }
 
     public static User findByLibraryId(String libraryId) {
-        try {
-            return getAll()
-                    .stream()
-                    .filter(user -> user.libraryId == libraryId)
-                    .collect(Collectors.toList())
-                    .get(0);
-        } catch (IndexOutOfBoundsException e) {
-            return null;
+        for (User user : getAll()) {
+            if (user.libraryId.equals(libraryId)) {
+                return user;
+            }
         }
+
+        return null;
     }
 
     public static void deleteAll() {

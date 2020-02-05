@@ -32,9 +32,9 @@ public class SessionHandler {
 
         try {
             Map<String, String> credential = this.promptCredential();
-            String username = credential.get("username");
+            String libraryId = credential.get("libraryId");
             String password =  credential.get("password");
-            isCredentialValid = this.validateCredentials(username, password);
+            isCredentialValid = this.validateCredentials(libraryId, password);
         } catch (IOException e) {
             System.err.println("An error has occurred");
         }
@@ -46,12 +46,12 @@ public class SessionHandler {
 
     private boolean validateCredentials(String username, String password) {
         User user = User.findByLibraryId(username);
-        if (user != null && user.password == password) {
-            CurrentUser.set(user);
-            return true;
-        }
 
-        return false;
+        if (user == null || !user.password.equals(password))
+            return false;
+
+        CurrentUser.set(user);
+        return true;
     }
 
     private Map<String, String> promptCredential() throws IOException {
@@ -62,7 +62,7 @@ public class SessionHandler {
         String password = this.inputReaderWrapper.readString();
 
         Map<String, String> credential = new HashMap<>();
-        credential.put("username", username);
+        credential.put("libraryId", username);
         credential.put("password", password);
 
         return credential;
