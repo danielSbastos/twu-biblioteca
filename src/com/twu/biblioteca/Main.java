@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 import com.twu.biblioteca.interfaces.IOption;
 import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
+import com.twu.biblioteca.models.CurrentUser;
 import com.twu.biblioteca.models.User;
 import com.twu.biblioteca.services.Menu;
 import com.twu.biblioteca.factories.MenuFactory;
@@ -39,13 +40,16 @@ public class Main {
     }
 
     private static void executeMainMenu(Menu menu) throws IOException {
-        while (true) {
+        while (CurrentUser.get() != null) {
             showMenu(menu);
             outputWriterWrapper.writeString(">>> ");
             int chosenOptionId = inputReaderWrapper.readInt();
             String optionContent = menu.executeOption(chosenOptionId);
             outputWriterWrapper.writeStringln(optionContent);
         }
+
+        if (login())
+            executeMainMenu(menu);
     }
 
     private static void showMenu(Menu menu) {

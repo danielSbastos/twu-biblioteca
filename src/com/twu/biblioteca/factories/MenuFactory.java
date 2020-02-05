@@ -9,10 +9,7 @@ import com.twu.biblioteca.models.Book;
 import com.twu.biblioteca.models.Movie;
 import com.twu.biblioteca.services.Library;
 import com.twu.biblioteca.services.Menu;
-import com.twu.biblioteca.services.menu_options.CheckoutItem;
-import com.twu.biblioteca.services.menu_options.Item;
-import com.twu.biblioteca.services.menu_options.Quit;
-import com.twu.biblioteca.services.menu_options.ReturnItem;
+import com.twu.biblioteca.services.menu_options.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +31,13 @@ public class MenuFactory {
                 2, "List of Movies", moviesLibrary, inputReaderWrapper, outputWriterWrapper, subMenuMovies
         );
         IOption quitOption = new Quit(new SystemWrapper());
+        IOption logoutOption = new Logout();
 
         List<IOption> options = new ArrayList<>();
         options.add(bookListOption);
         options.add(movieListOption);
         options.add(quitOption);
+        options.add(logoutOption);
 
         return new Menu(options);
     }
@@ -64,6 +63,7 @@ public class MenuFactory {
         options.add(checkoutItemOption);
         options.add(returnItemOption);
         options.add(new Quit(new SystemWrapper()));
+        options.add(new Logout());
 
         return new Menu(options);
     }
