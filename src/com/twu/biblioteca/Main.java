@@ -5,12 +5,10 @@ import com.twu.biblioteca.interfaces.IOption;
 import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
 import com.twu.biblioteca.models.CurrentUser;
-import com.twu.biblioteca.models.User;
 import com.twu.biblioteca.services.Menu;
 import com.twu.biblioteca.factories.MenuFactory;
 
 import java.io.IOException;
-import java.util.List;
 
 
 public class Main {
@@ -18,14 +16,14 @@ public class Main {
     private static InputReaderWrapper inputReaderWrapper = new InputReaderWrapper();
 
     public static void main(String[] args) {
-        if (!successfulLogin()) return;
+        outputWriterWrapper.writeStringln("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n");
 
-        outputWriterWrapper.writeStringln(new Welcome().showMessage());
-
-        Menu menu = new MenuFactory().execute();
+        SessionHandler sessionHandler = new SessionFactory().execute();
+        if (!sessionHandler.login()) return;
 
         try {
-           executeMainMenu(menu);
+            Menu menu = new MenuFactory().execute();
+            executeMainMenu(menu, sessionHandler);
         } catch (IOException | NumberFormatException e) {
             System.err.println("Invalid input format!");
         } catch (IndexOutOfBoundsException e) {
@@ -33,22 +31,19 @@ public class Main {
         }
     }
 
-    private static boolean successfulLogin() {
-        SessionHandler sessionHandler = new SessionFactory().execute();
-        return sessionHandler.login();
-    }
-
-    private static void executeMainMenu(Menu menu) throws IOException {
-        while (CurrentUser.get() != null) {
+    private static void executeMainMenu(Menu menu, SessionHandler sessionHandler) throws IOException {
+        while (sessionHandler.anyActiveSession()) {
+            outputWriterWrapper.writeStringln("Choose one option to continue:");
             showMenu(menu);
             outputWriterWrapper.writeString(">>> ");
+
             int chosenOptionId = inputReaderWrapper.readInt();
             String optionContent = menu.executeOption(chosenOptionId);
             outputWriterWrapper.writeStringln(optionContent);
         }
 
-        if (successfulLogin())
-            executeMainMenu(menu);
+        if (sessionHandler.login())
+            executeMainMenu(menu, sessionHandler);
     }
 
     private static void showMenu(Menu menu) {

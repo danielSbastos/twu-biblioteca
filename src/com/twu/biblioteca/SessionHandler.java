@@ -30,6 +30,10 @@ public class SessionHandler {
         CurrentUser.set(null);
     }
 
+    public boolean anyActiveSession() {
+        return CurrentUser.get() != null;
+    }
+
     public boolean login() {
         User loggedInUser = null;
         try {
