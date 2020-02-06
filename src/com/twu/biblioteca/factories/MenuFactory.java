@@ -31,8 +31,8 @@ public class MenuFactory {
         IOption movieListOption = new Item(
                 2, "List of Movies", moviesLibrary, inputReaderWrapper, outputWriterWrapper, subMenuMovies
         );
-        IOption quitOption = new Quit(new SystemWrapper());
-        IOption logoutOption = new Logout();
+        IOption quitOption = new Quit(3, "Quit system", new SystemWrapper());
+        IOption logoutOption = new Logout(4, "Log out");
         IOption userInformation = new UserInformation();
 
         List<IOption> options = new ArrayList<>();
@@ -61,12 +61,12 @@ public class MenuFactory {
 
     private Menu buildSubMenu(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
         List<IOption> options = new ArrayList<>();
-        IOption checkoutItemOption = new CheckoutItem(library, inputReaderWrapper, outputWriterWrapper);
-        IOption returnItemOption = new ReturnItem(library, inputReaderWrapper, outputWriterWrapper);
+        IOption checkoutItemOption = new CheckoutItem(1, "Checkout item", library, inputReaderWrapper, outputWriterWrapper);
+        IOption returnItemOption = new ReturnItem(2, "Return item", library, inputReaderWrapper, outputWriterWrapper);
         options.add(checkoutItemOption);
         options.add(returnItemOption);
-        options.add(new Quit(new SystemWrapper()));
-        options.add(new Logout());
+        options.add(new Quit(3, "Quit system", new SystemWrapper()));
+        options.add(new Logout(4, "Log out"));
 
         return new Menu(options);
     }

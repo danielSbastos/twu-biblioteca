@@ -14,4 +14,6 @@ public interface IItem {
     void setBookedBy(User user);
 
     User getBookedBy();
+
+    boolean alreadyBooked();
 }

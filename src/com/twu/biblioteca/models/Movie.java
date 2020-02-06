@@ -42,13 +42,7 @@ public class Movie implements IItem {
                 this.status
         );
 
-        // FIXME: This code is very bad
-        if (CurrentUser.get().role == "librarian" && this.status == "booked")
-            data += String.format(" | Booked by: %s\n", this.bookedBy.libraryId);
-        else
-            data += "\n";
-
-        return data;
+        return data + this.additionalData();
     }
 
     public void setBookedBy(User user) {
@@ -57,5 +51,18 @@ public class Movie implements IItem {
 
     public User getBookedBy() {
         return this.bookedBy;
+    }
+
+    public boolean alreadyBooked() {
+        return this.status == "booked";
+    }
+
+    private String additionalData() {
+        User currentUser = CurrentUser.get();
+
+        if (currentUser.isLibrarian() && this.alreadyBooked())
+            return String.format(" | Booked by: %s\n", this.bookedBy.libraryId);
+
+        return "\n";
     }
 }

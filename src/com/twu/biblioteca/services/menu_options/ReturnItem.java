@@ -8,22 +8,32 @@ import com.twu.biblioteca.services.Library;
 import java.io.IOException;
 
 public class ReturnItem implements IOption {
+    private int id;
+    private String title;
     private Library library;
     private InputReaderWrapper inputReaderWrapper;
     private OutputWriterWrapper outputWriterWrapper;
 
-    public ReturnItem(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
+    public ReturnItem(
+            int id,
+            String title,
+            Library library,
+            InputReaderWrapper inputReaderWrapper,
+            OutputWriterWrapper outputWriterWrapper
+    ) {
+        this.id = id;
+        this.title = title;
         this.library = library;
         this.inputReaderWrapper = inputReaderWrapper;
         this.outputWriterWrapper = outputWriterWrapper;
     }
 
     public String getTitle() {
-        return "Return item";
+        return this.title;
     }
 
     public int getId() {
-        return 2;
+        return this.id;
     }
 
     public String action() {

@@ -93,6 +93,40 @@ public class BookTest {
     }
 
     @Test
+    public void alreadyBookedReturnsTrue() {
+        User bookedByUser = new User(
+                "xxx-xxxx",
+                "qwerty",
+                "librarian",
+                "matheus",
+                "matheus@tw.com",
+                "31 99999-9999"
+        );
+
+        Book book = new Book(1, "Book title", "Author 1", 1999);
+        book.setStatus("booked");
+
+        assertEquals(book.alreadyBooked(), true);
+    }
+
+    @Test
+    public void alreadyBookedReturnsFalse() {
+        User bookedByUser = new User(
+                "xxx-xxxx",
+                "qwerty",
+                "librarian",
+                "matheus",
+                "matheus@tw.com",
+                "31 99999-9999"
+        );
+
+        Book book = new Book(1, "Book title", "Author 1", 1999);
+        book.setStatus("available");
+
+        assertEquals(book.alreadyBooked(), false);
+    }
+
+    @Test
     public void bookedBy() {
         User user = new User(
                 "xxx-xxxx",

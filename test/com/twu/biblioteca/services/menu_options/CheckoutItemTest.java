@@ -27,7 +27,13 @@ public class CheckoutItemTest {
         OutputWriterWrapper outputWriterWrapperMock = Mockito.mock(OutputWriterWrapper.class);
         when(inputReaderWrapperMock.readInt()).thenReturn(firstBook.getId()).thenThrow(new IOException());
 
-        CheckoutItem checkoutItem = new CheckoutItem(library, inputReaderWrapperMock, outputWriterWrapperMock);
+        CheckoutItem checkoutItem = new CheckoutItem(
+                1,
+                "Checkout item",
+                library,
+                inputReaderWrapperMock,
+                outputWriterWrapperMock
+        );
         String result = checkoutItem.action();
 
         assertEquals(firstBook.getStatus(), "booked");
@@ -41,7 +47,13 @@ public class CheckoutItemTest {
     public void getTitle() {
         Library library = new Library(new ArrayList<>());
 
-        CheckoutItem checkoutItem = new CheckoutItem(library, new InputReaderWrapper(), new OutputWriterWrapper());
+        CheckoutItem checkoutItem = new CheckoutItem(
+                1,
+                "Checkout item",
+                library,
+                new InputReaderWrapper(),
+                new OutputWriterWrapper()
+        );
 
         assertEquals(checkoutItem.getTitle(), "Checkout item");
     }
@@ -50,7 +62,13 @@ public class CheckoutItemTest {
     public void getId() {
         Library library = new Library(new ArrayList<>());
 
-        CheckoutItem checkoutItem = new CheckoutItem(library, new InputReaderWrapper(), new OutputWriterWrapper());
+        CheckoutItem checkoutItem = new CheckoutItem(
+                1,
+                "Checkout item",
+                library,
+                new InputReaderWrapper(),
+                new OutputWriterWrapper()
+        );
 
         assertEquals(checkoutItem.getId(), 1);
     }

@@ -27,30 +27,17 @@ public class SessionHandler {
     }
 
     public boolean login() {
-        boolean isCredentialValid = false;
-
+        User loggedInUser = null;
         try {
             Map<String, String> credential = this.promptCredential();
-            String libraryId = credential.get("libraryId");
-            String password =  credential.get("password");
-            isCredentialValid = this.validateCredentials(libraryId, password);
-        } catch (IOException e) {
-            System.err.println("An error has occurred");
-        }
+            loggedInUser = User.findByLibraryIdAndPassword(credential.get("libraryId"), credential.get("password"));
+            CurrentUser.set(loggedInUser);
+        } catch (IOException e) {}
 
-        if (!isCredentialValid) System.err.println("Invalid username or password");
+        if (loggedInUser == null)
+            System.err.println("Invalid username or password");
 
-        return isCredentialValid;
-    }
-
-    private boolean validateCredentials(String username, String password) {
-        User user = User.findByLibraryId(username);
-
-        if (user == null || !user.password.equals(password))
-            return false;
-
-        CurrentUser.set(user);
-        return true;
+        return loggedInUser != null;
     }
 
     private Map<String, String> promptCredential() throws IOException {

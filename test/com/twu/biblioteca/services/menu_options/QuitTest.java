@@ -14,7 +14,7 @@ public class QuitTest {
     {
         SystemWrapper systemMock = Mockito.mock(SystemWrapper.class);
 
-        Quit quit = new Quit(systemMock);
+        Quit quit = new Quit(1, "Quit system", systemMock);
         quit.action();
 
         verify(systemMock, times(1)).exit();

@@ -8,22 +8,32 @@ import com.twu.biblioteca.services.Library;
 import java.io.IOException;
 
 public class CheckoutItem implements IOption {
+    private int id;
+    private String title;
     private Library library;
     private InputReaderWrapper inputReaderWrapper;
     private OutputWriterWrapper outputWriterWrapper;
 
-    public CheckoutItem(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
-        this.library = library;
-        this.inputReaderWrapper = inputReaderWrapper;
-        this.outputWriterWrapper = outputWriterWrapper;
-    }
-
-    public String getTitle() {
-        return "Checkout item";
+    public CheckoutItem(
+        int id,
+        String title,
+        Library library,
+        InputReaderWrapper inputReaderWrapper,
+        OutputWriterWrapper outputWriterWrapper
+    ) {
+            this.id = id;
+            this.title = title;
+            this.library = library;
+            this.inputReaderWrapper = inputReaderWrapper;
+            this.outputWriterWrapper = outputWriterWrapper;
     }
 
     public int getId() {
-        return 1;
+        return this.id;
+    }
+
+    public String getTitle() {
+        return this.title;
     }
 
     public String action() {

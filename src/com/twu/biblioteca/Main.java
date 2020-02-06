@@ -18,7 +18,7 @@ public class Main {
     private static InputReaderWrapper inputReaderWrapper = new InputReaderWrapper();
 
     public static void main(String[] args) {
-        if (!login()) return;
+        if (!successfulLogin()) return;
 
         outputWriterWrapper.writeStringln(new Welcome().showMessage());
 
@@ -33,7 +33,7 @@ public class Main {
         }
     }
 
-    private static boolean login() {
+    private static boolean successfulLogin() {
         List<User> users = UsersFactory.execute();
         SessionHandler sessionHandler = new SessionHandler(users, inputReaderWrapper, outputWriterWrapper);
         return sessionHandler.login();
@@ -48,7 +48,7 @@ public class Main {
             outputWriterWrapper.writeStringln(optionContent);
         }
 
-        if (login())
+        if (successfulLogin())
             executeMainMenu(menu);
     }
 

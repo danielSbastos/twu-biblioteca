@@ -289,8 +289,8 @@ public class ItemTest {
 
     private Menu buildSubMenu(Library library, InputReaderWrapper inputReaderWrapper, OutputWriterWrapper outputWriterWrapper) {
         List<IOption> options = new ArrayList<>();
-        IOption checkoutItemOption = new CheckoutItem(library, inputReaderWrapper, outputWriterWrapper);
-        IOption returnItemOption = new ReturnItem(library, inputReaderWrapper, outputWriterWrapper);
+        IOption checkoutItemOption = new CheckoutItem(1, "Checkout item", library, inputReaderWrapper, outputWriterWrapper);
+        IOption returnItemOption = new ReturnItem(2, "Return item", library, inputReaderWrapper, outputWriterWrapper);
         options.add(checkoutItemOption);
         options.add(returnItemOption);
 

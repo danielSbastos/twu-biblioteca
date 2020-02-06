@@ -44,7 +44,7 @@ public class UserTest {
     }
 
     @Test
-    public void findByLibraryIdReturnsUser() {
+    public void findByLibraryIdAndPasswordReturnsUser() {
         User user = new User(
                 "yyy-yyyy",
                 "qwerty",
@@ -62,11 +62,11 @@ public class UserTest {
                 "31 99999-9999"
         );
 
-        assertEquals(User.findByLibraryId("yyy-yyyy"), user);
+        assertEquals(User.findByLibraryIdAndPassword("yyy-yyyy", "qwerty"), user);
     }
 
     @Test
-    public void findByLibraryIdReturnsNull() {
+    public void findByLibraryIdAndPasswordReturnsNullIfWrongLibraryId() {
         User user = new User(
                 "yyy-yyyy",
                 "qwerty",
@@ -84,6 +84,78 @@ public class UserTest {
                 "31 99999-9999"
         );
 
-        assertEquals(User.findByLibraryId("<not-existent"), null);
+        assertEquals(User.findByLibraryIdAndPassword("<not-existent-library-id", "qwerty"), null);
+    }
+
+    @Test
+    public void findByLibraryIdAndPasswordReturnsNullIfWrongPassword() {
+        User user = new User(
+                "yyy-yyyy",
+                "qwerty",
+                "customer",
+                "daniel",
+                "daniel@tw.com",
+                "31 99999-9999"
+        );
+        new User(
+                "xxx-xxxx",
+                "qwerty",
+                "librarian",
+                "matheus",
+                "matheus@tw.com",
+                "31 99999-9999"
+        );
+
+        assertEquals(User.findByLibraryIdAndPassword("yyy-yyyy", "<wrong-password>"), null);
+    }
+
+    @Test
+    public void findByLibraryIdAndPasswordReturnsNullIfWrongPasswordAndLibraryId() {
+        User user = new User(
+                "yyy-yyyy",
+                "qwerty",
+                "customer",
+                "daniel",
+                "daniel@tw.com",
+                "31 99999-9999"
+        );
+        new User(
+                "xxx-xxxx",
+                "qwerty",
+                "librarian",
+                "matheus",
+                "matheus@tw.com",
+                "31 99999-9999"
+        );
+
+        assertEquals(User.findByLibraryIdAndPassword("<wrong-libraryId>", "<wrong-password"), null);
+    }
+
+    @Test
+    public void isLibrarianReturnsTrue() {
+        User user = new User(
+                "xxx-xxxx",
+                "qwerty",
+                "librarian",
+                "matheus",
+                "matheus@tw.com",
+                "31 99999-9999"
+        );
+
+        assertEquals(user.isLibrarian(), true);
+    }
+
+    @Test
+    public void isLibrarianReturnsFalse() {
+        User user = new User(
+                "xxx-xxxx",
+                "qwerty",
+                "customer",
+                "matheus",
+                "matheus@tw.com",
+                "31 99999-9999"
+        );
+
+        assertEquals(user.isLibrarian(), false);
     }
 }

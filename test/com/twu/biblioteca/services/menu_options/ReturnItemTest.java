@@ -28,7 +28,13 @@ public class ReturnItemTest {
         OutputWriterWrapper outputWriterWrapperMock = Mockito.mock(OutputWriterWrapper.class);
         when(inputReaderWrapperMock.readInt()).thenReturn(firstBook.getId()).thenThrow(new IOException());
 
-        ReturnItem returnItem = new ReturnItem(library, inputReaderWrapperMock, outputWriterWrapperMock);
+        ReturnItem returnItem = new ReturnItem(
+                1,
+                "Return item",
+                library,
+                inputReaderWrapperMock,
+                outputWriterWrapperMock
+        );
         String result = returnItem.action();
 
         assertEquals(firstBook.getStatus(), "available");
@@ -42,7 +48,13 @@ public class ReturnItemTest {
     public void getTitle() {
         Library library = new Library(new ArrayList<>());
 
-        ReturnItem returnItem = new ReturnItem(library, new InputReaderWrapper(), new OutputWriterWrapper());
+        ReturnItem returnItem = new ReturnItem(
+                1,
+                "Return item",
+                library,
+                new InputReaderWrapper(),
+                new OutputWriterWrapper()
+        );
 
         assertEquals(returnItem.getTitle(), "Return item");
     }
@@ -51,9 +63,15 @@ public class ReturnItemTest {
     public void getId() {
         Library library = new Library(new ArrayList<>());
 
-        ReturnItem returnItem = new ReturnItem(library, new InputReaderWrapper(), new OutputWriterWrapper());
+        ReturnItem returnItem = new ReturnItem(
+                1,
+                "Return item",
+                library,
+                new InputReaderWrapper(),
+                new OutputWriterWrapper()
+        );
 
-        assertEquals(returnItem.getId(), 2);
+        assertEquals(returnItem.getId(), 1);
     }
 
     private List<IItem> buildBooks() {

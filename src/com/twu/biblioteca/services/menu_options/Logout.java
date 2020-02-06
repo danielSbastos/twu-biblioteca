@@ -5,17 +5,25 @@ import com.twu.biblioteca.models.CurrentUser;
 
 public class Logout implements IOption {
 
+    private int id;
+    private String title;
+
+    public Logout(int id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
     public String action() {
         CurrentUser.set(null);
         return "Logged out";
     }
 
     public int getId() {
-        return 4;
+        return this.id;
     };
 
     public String getTitle() {
-        return "Log out";
+        return this.title;
     }
 
 }

@@ -17,9 +17,9 @@ public class User {
        return users;
     }
 
-    public static User findByLibraryId(String libraryId) {
+    public static User findByLibraryIdAndPassword(String libraryId, String password) {
         for (User user : getAll()) {
-            if (user.libraryId.equals(libraryId)) {
+            if (user.libraryId.equals(libraryId) && user.password.equals(password) ) {
                 return user;
             }
         }
@@ -40,5 +40,9 @@ public class User {
         this.phoneNumber = phoneNumber;
 
         users.add(this);
+    }
+
+    public boolean isLibrarian() {
+        return this.role == "librarian";
     }
 }

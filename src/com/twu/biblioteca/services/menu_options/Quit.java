@@ -6,20 +6,21 @@ import com.twu.biblioteca.lib.SystemWrapper;
 public class Quit implements IOption {
 
     private SystemWrapper systemWrapper;
+    private int id;
+    private String title;
 
-    public Quit(SystemWrapper systemWrapper)
-    {
+    public Quit(int id, String title, SystemWrapper systemWrapper) {
         this.systemWrapper = systemWrapper;
+        this.id = id;
+        this.title = title;
     }
 
-    public String getTitle()
-    {
-        return "Quit system";
+    public String getTitle() {
+        return this.title;
     }
 
-    public int getId()
-    {
-        return 3;
+    public int getId() {
+        return this.id;
     }
 
     public String action() {
