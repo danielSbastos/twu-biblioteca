@@ -26,6 +26,10 @@ public class SessionHandler {
         this.outputWriterWrapper = outputWriterWrapper;
     }
 
+    public void logout() {
+        CurrentUser.set(null);
+    }
+
     public boolean login() {
         User loggedInUser = null;
         try {

@@ -5,6 +5,13 @@ import com.twu.biblioteca.models.CurrentUser;
 import com.twu.biblioteca.models.User;
 
 public class UserInformation implements IOption {
+    private int id;
+    private String title;
+
+    public UserInformation(int id, String title) {
+        this.id = id;
+        this.title = title;
+    }
 
     public String action() {
         User currentUser = CurrentUser.get();
@@ -15,10 +22,10 @@ public class UserInformation implements IOption {
     }
 
     public int getId() {
-        return 5;
+        return this.id;
     }
 
     public String getTitle() {
-        return "See my information";
+        return this.title;
     }
 }

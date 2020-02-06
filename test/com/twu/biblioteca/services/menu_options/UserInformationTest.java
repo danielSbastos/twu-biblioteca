@@ -25,7 +25,7 @@ public class UserInformationTest {
 
     @Test
     public void actionShowsUserInformation() {
-        UserInformation userInformation = new UserInformation();
+        UserInformation userInformation = new UserInformation(5, "See my information");
 
         assertEquals(userInformation.action(), "Name: daniel | Email: daniel@twu.com | Phone number: 47 99633-2772");
     }

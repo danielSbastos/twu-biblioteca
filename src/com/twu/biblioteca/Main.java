@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.factories.SessionFactory;
 import com.twu.biblioteca.interfaces.IOption;
 import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
@@ -7,7 +8,6 @@ import com.twu.biblioteca.models.CurrentUser;
 import com.twu.biblioteca.models.User;
 import com.twu.biblioteca.services.Menu;
 import com.twu.biblioteca.factories.MenuFactory;
-import com.twu.biblioteca.factories.UsersFactory;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,8 +34,7 @@ public class Main {
     }
 
     private static boolean successfulLogin() {
-        List<User> users = UsersFactory.execute();
-        SessionHandler sessionHandler = new SessionHandler(users, inputReaderWrapper, outputWriterWrapper);
+        SessionHandler sessionHandler = new SessionFactory().execute();
         return sessionHandler.login();
     }
 
