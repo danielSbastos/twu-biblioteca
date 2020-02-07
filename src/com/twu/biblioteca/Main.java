@@ -4,7 +4,6 @@ import com.twu.biblioteca.factories.SessionFactory;
 import com.twu.biblioteca.interfaces.IOption;
 import com.twu.biblioteca.lib.InputReaderWrapper;
 import com.twu.biblioteca.lib.OutputWriterWrapper;
-import com.twu.biblioteca.models.CurrentUser;
 import com.twu.biblioteca.services.Menu;
 import com.twu.biblioteca.factories.MenuFactory;
 
